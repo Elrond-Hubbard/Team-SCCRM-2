@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Patient extends Model {}
+class Doctor extends Model {}
 
-Patient.init(
+Doctor.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,37 +11,24 @@ Patient.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName: {
+    fullName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    age: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    weight: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    doctor_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "doctor",
-        key: "id",
-      },
     },
   },
   {
+    hooks: {
+      //     TODO: PASSWORD HOOK GOES HERE
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    modelName: "patient",
+    modelName: "doctor",
   }
 );
 
-module.exports = Patient;
+module.exports = Doctor;
