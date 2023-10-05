@@ -6,6 +6,7 @@ const patientdata = [
         lastName: "Doe",
         age: 35,
         weight: 175,
+        comment: "",
         doctor_id: 1
       },
       {
@@ -13,6 +14,7 @@ const patientdata = [
         lastName: "Smith",
         age: 28,
         weight: 150,
+        comment: "",
         doctor_id: 2
       },
       {
@@ -20,6 +22,7 @@ const patientdata = [
         lastName: "Johnson",
         age: 42,
         weight: 200,
+        comment: "",
         doctor_id: 3
       },
       {
@@ -27,6 +30,7 @@ const patientdata = [
         lastName: "Brown",
         age: 31,
         weight: 140,
+        comment: "",
         doctor_id: 4
       },
       {
@@ -34,6 +38,7 @@ const patientdata = [
         lastName: "Lee",
         age: 50,
         weight: 190,
+        comment: "",
         doctor_id: 5
       },
       {
@@ -41,6 +46,7 @@ const patientdata = [
         lastName: "Wilson",
         age: 26,
         weight: 135,
+        comment: "",
         doctor_id: 1
       },
       {
@@ -48,6 +54,7 @@ const patientdata = [
         lastName: "Anderson",
         age: 38,
         weight: 180,
+        comment: "",
         doctor_id: 2
       },
       {
@@ -55,6 +62,7 @@ const patientdata = [
         lastName: "Taylor",
         age: 29,
         weight: 155,
+        comment: "",
         doctor_id: 3
       },
       {
@@ -62,6 +70,7 @@ const patientdata = [
         lastName: "Martinez",
         age: 45,
         weight: 205,
+        comment: "",
         doctor_id: 4
       },
       {
@@ -69,6 +78,7 @@ const patientdata = [
         lastName: "Garcia",
         age: 33,
         weight: 160,
+        comment: "",
         doctor_id: 5
       },
       {
@@ -76,6 +86,7 @@ const patientdata = [
         lastName: "Harris",
         age: 27,
         weight: 145,
+        comment: "",
         doctor_id: 1
       },
       {
@@ -83,6 +94,7 @@ const patientdata = [
         lastName: "Clark",
         age: 39,
         weight: 185,
+        comment: "",
         doctor_id: 2
       },
       {
@@ -90,6 +102,7 @@ const patientdata = [
         lastName: "Miller",
         age: 30,
         weight: 155,
+        comment: "",
         doctor_id: 3
       },
       {
@@ -97,6 +110,7 @@ const patientdata = [
         lastName: "Davis",
         age: 47,
         weight: 210,
+        comment: "",
         doctor_id: 4
       },
       {
@@ -104,6 +118,7 @@ const patientdata = [
         lastName: "Wilson",
         age: 32,
         weight: 165,
+        comment: "",
         doctor_id: 5
       }
 ]
