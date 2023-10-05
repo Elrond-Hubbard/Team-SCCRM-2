@@ -9,9 +9,10 @@ canvas.height = window.innerHeight;
 
 // HEARTBEAT
 // Transport.bpm = patient_db/vitals/heartRate
-Tone.Transport.bpm.value = 85;
+Tone.Transport.bpm.value = 70;
 const meter = new Tone.Meter();
 const heart = new Tone.MembraneSynth().connect(meter);
+console.log(heart)
 
 const heartbeat = new Tone.Sequence(
   (time, note) => {
@@ -37,7 +38,7 @@ var y = 0;
 
 function animate() {
   // translucent mask painted over each frame to "fade out" point
-  ctx.fillStyle = "rgba(0,0,0,0.005)";
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   // canvas cleared and point position reset when point reaches end of canvas
   if (x >= canvas.width) {
@@ -49,13 +50,13 @@ function animate() {
   ctx.moveTo(x, y);
 
   // increment point position
-  x += 1;
+  x += 3;
   // y position determined by Tone.meter
   y = meter.getValue() * -1.5 + canvas.height / 2;
 
   ctx.lineTo(x, y);
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = "red";
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "white";
   ctx.stroke();
 
   // run this function on each frame
