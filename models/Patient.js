@@ -27,6 +27,9 @@ Patient.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    comment: {
+      type: DataTypes.STRING
+    },
     doctor_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
