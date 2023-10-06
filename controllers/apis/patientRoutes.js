@@ -31,9 +31,7 @@ router.get("/", (req, res) => {
   });
   
   // Update patient info using api/patient/:id
-
-  // Still working on this one
-  router.put("/api/patient/", async (req, res) => {
+  router.put("/:id", async (req, res) => {
     try {
       const updatedPatient = await Patient.update(
         {
@@ -70,12 +68,4 @@ router.get("/", (req, res) => {
   });
 
 module.exports = router;
-//   {
-//   	"firstName": "Steven",
-//   	"lastName": "Bunde",
-//   	"age": 69,
-//   	"weight": 310,
-//   	"Comment": "Pretty cool dude",
-//   	"doctor_id": "1"
-//   }
-  
+
