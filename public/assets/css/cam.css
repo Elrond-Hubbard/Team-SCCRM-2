@@ -1,0 +1,28 @@
+
+#mainContainer{
+    /* border: 2px solid black; */
+    outline: 2px solid black;
+    height: 100%;
+    max-width: 83%;
+    margin-left:15%;
+    margin-bottom: 10px
+
+}
+
+#patInfo{
+    margin-bottom: 1%;
+}
+#vitalData{
+    font-size: 40px;
+}
+#resp{
+  margin-top: 20px;
+  height: 250px
+}
+#pleth{
+    margin-top: 20px;
+    height: 250px
+  }
+  #vitalContainer{
+    margin-top:10px
+  }
