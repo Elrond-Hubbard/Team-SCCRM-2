@@ -1,11 +1,18 @@
-document.getElementById("signIn").addEventListener("click", function() {
-    
-    var physId = document.getElementById("physID").value;
-    var physPassword = document.getElementById("physPassword").value;
+const loginForm = async (event) => {
+    event.preventDefault();
 
-    // // form validation 
-    // // submit data to the server
-
+    // Collect the values from the input fields
+    let physicianID = document.getElementById('physician').value.trim()
+    let password = document.getElementById('password').value.trim()
     
-    window.location.href = "/home";
-});
+    // Send a POST to the API
+    if (physicianID && password) {
+        const response = await fetch('/api/doctor/login')
+        console.log(response)
+    } else {
+        console.log('missing either ID or password')
+    }
+
+}
+
+document.getElementById('signIn').addEventListener( 'click', loginForm)
