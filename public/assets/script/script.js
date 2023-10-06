@@ -32,15 +32,14 @@ const containerEl = document.getElementById("canvasContainer");
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 
-canvas.width = containerEl.offsetWidth - 20;
-canvas.height = containerEl.offsetHeight / 2;
+canvas.width = containerEl.offsetWidth ;
+canvas.height = containerEl.offsetHeight ;
 
 // HEARTBEAT
 // Transport.bpm = patient_db/vitals/heartRate
 Tone.Transport.bpm.value = 70;
 const meter = new Tone.Meter();
 const heart = new Tone.MembraneSynth().connect(meter);
-console.log(heart);
 
 const heartbeat = new Tone.Sequence(
   (time, note) => {
@@ -70,11 +69,11 @@ function animate() {
   // increment point position
   x += 2;
   // y position determined by Tone.meter
-  y = meter.getValue() * -1 + canvas.height / 2.5;
+  y = meter.getValue() * -1.5 + canvas.height / 3;
 
   ctx.lineTo(x, y);
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "white";
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "lime";
   ctx.stroke();
 
   // run this function on each frame
