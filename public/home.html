@@ -35,7 +35,7 @@
           <div class="col">
             <div id="vitalContainer" class="card">
               <div class="card-body">
-                <h5 class="card-title">BPM (Heart Rate)</h5>
+                <h5 class="card-title">BPM</h5>
                 <p id="vitalData" name="BPM" class="card-text text-center">
                   80
                 </p>
@@ -45,7 +45,7 @@
           <div class="col">
             <div id="vitalContainer" class="card">
               <div class="card-body">
-                <h5 class="card-title">mmHG (Blood Pressure)</h5>
+                <h5 class="card-title">mmHG</h5>
                 <p id="vitalData" name="mmHG" class="card-text text-center">
                   110|83
                 </p>
@@ -55,7 +55,7 @@
           <div class="col">
             <div id="vitalContainer" class="card">
               <div class="card-body">
-                <h5 class="card-title">Temperature (Farenheit)</h5>
+                <h5 class="card-title">Temperature</h5>
                 <p id="vitalData" name="Temp" class="card-text text-center">
                   98.8
                 </p>
@@ -65,7 +65,7 @@
           <div class="col">
             <div id="vitalContainer" class="card">
               <div class="card-body">
-                <h5 class="card-title">SPO2 (Oxygen)</h5>
+                <h5 class="card-title">SPO2</h5>
                 <p id="vitalData" name="O2" class="card-text text-center">
                   97%
                 </p>
@@ -90,18 +90,17 @@
               <div id="pleth" class="card">
                 <div id="canvasContainer" class="card-body text-center">
                   <h5 class="card-title">PLETH (Pulse Monitor)</h5>
-
-                  <canvas id="canvas1"></canvas>
+                  <canvas id="canvas1"> </canvas>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <section>
-          <button id="button">start</button>
-          <input id="slider" type="range" min="20" max="150" value="70" />
-        </section>
       </main>
+      <section>
+        <button id="button">start</button>
+        <input id="slider" type="range" min="20" max="150" value="70" />
+      </section>
     </div>
 
     <script src="http://unpkg.com/tone"></script>

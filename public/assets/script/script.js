@@ -1,15 +1,13 @@
+const patientInfoEl = document.getElementById("patInfo");
+
 const heartRateEl = document.querySelector('[name="BPM"]');
 const bloodPressEl = document.querySelector('[name="mmHG"]');
 const bodyTempEl = document.querySelector('[name="Temp"]');
 const oxygenEl = document.querySelector('[name="O2"]');
 
-function getLatestVitals(doctor_id, patient_id) {
+function getPatient(doctor_id, patient_id) {
   return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`)
     .then((response) => response.json())
-    .then((data) => {
-      const vitals = data.vitals.pop();
-      return vitals;
-    });
 }
 
 function updateMonitor(vitals) {
@@ -20,8 +18,20 @@ function updateMonitor(vitals) {
   Tone.Transport.bpm.value = vitals.heartRate;
 }
 
-getLatestVitals(5, 10).then((vitals) => {
-  updateMonitor(vitals);
+function updatePatient(patient) {
+  patientInfoEl.innerHTML = `
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Patient Name: ${patient.firstName} ${patient.lastName}</li>
+    <li class="list-group-item">Age: ${patient.age}</li>
+    <li class="list-group-item">Weight: ${patient.weight}</li>
+    <li class="list-group-item">isSleepy:</li>
+  </ul>`;
+}
+
+getPatient(5, 15).then((patient) => {
+    updatePatient(patient)
+    const vitals = patient.vitals.pop()
+    updateMonitor(vitals)
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -32,15 +42,14 @@ const containerEl = document.getElementById("canvasContainer");
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 
-canvas.width = containerEl.offsetWidth - 20;
-canvas.height = containerEl.offsetHeight / 2;
+canvas.width = containerEl.offsetWidth;
+canvas.height = containerEl.offsetHeight;
 
 // HEARTBEAT
 // Transport.bpm = patient_db/vitals/heartRate
 Tone.Transport.bpm.value = 70;
 const meter = new Tone.Meter();
 const heart = new Tone.MembraneSynth().connect(meter);
-console.log(heart);
 
 const heartbeat = new Tone.Sequence(
   (time, note) => {
@@ -70,11 +79,11 @@ function animate() {
   // increment point position
   x += 2;
   // y position determined by Tone.meter
-  y = meter.getValue() * -1 + canvas.height / 2.5;
+  y = meter.getValue() * -1.5 + canvas.height / 3;
 
   ctx.lineTo(x, y);
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "white";
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "lime";
   ctx.stroke();
 
   // run this function on each frame
