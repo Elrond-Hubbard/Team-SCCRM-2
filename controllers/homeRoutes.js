@@ -12,4 +12,9 @@ router.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "home.html"));
 });
 
+// TEST ENDPOINT: IGNORE THIS
+router.get("/aside", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "aside.html"));
+});
+
 module.exports = router;
