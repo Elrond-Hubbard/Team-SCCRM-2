@@ -6,8 +6,9 @@ const bodyTempEl = document.querySelector('[name="Temp"]');
 const oxygenEl = document.querySelector('[name="O2"]');
 
 function getPatient(doctor_id, patient_id) {
-  return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`)
-    .then((response) => response.json())
+  return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
+    (response) => response.json()
+  );
 }
 
 function updateMonitor(vitals) {
@@ -28,10 +29,10 @@ function updatePatient(patient) {
   </ul>`;
 }
 
-getPatient(5, 15).then((patient) => {
-    updatePatient(patient)
-    const vitals = patient.vitals.pop()
-    updateMonitor(vitals)
+getPatient(5, 5).then((patient) => {
+  updatePatient(patient);
+  const vitals = patient.vitals.pop();
+  updateMonitor(vitals);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -59,29 +60,31 @@ const heartbeat = new Tone.Sequence(
   "4n"
 );
 
-// terrible horrible global variables
-var x = 0;
-var y = 0;
+// canvas draw coordinates
+const coord = {
+  x: 0,
+  y: 0,
+};
 
 function animate() {
   // translucent mask painted over each frame to "fade out" point
   ctx.fillStyle = "rgba(0,0,0,0.01)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   // canvas cleared and point position reset when point reaches end of canvas
-  if (x >= canvas.width) {
+  if (coord.x >= canvas.width) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    x = 0;
+    coord.x = 0;
   }
 
   ctx.beginPath();
-  ctx.moveTo(x, y);
+  ctx.moveTo(coord.x, coord.y);
 
   // increment point position
-  x += 2;
+  coord.x += 2;
   // y position determined by Tone.meter
-  y = meter.getValue() * -1.5 + canvas.height / 3;
+  coord.y = meter.getValue() * -1.5 + canvas.height / 3;
 
-  ctx.lineTo(x, y);
+  ctx.lineTo(coord.x, coord.y);
   ctx.lineWidth = 3;
   ctx.strokeStyle = "lime";
   ctx.stroke();
