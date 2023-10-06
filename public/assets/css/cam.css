@@ -1,12 +1,10 @@
-
-#mainContainer{
-    /* border: 2px solid black; */
-    outline: 2px solid black;
-    height: 100%;
-    max-width: 83%;
-    margin-left:15%;
-    margin-bottom: 10px
-
+#mainContainer {
+  /* border: 2px solid black; */
+  outline: 2px solid black;
+  height: 100%;
+  max-width: 83%;
+  margin-left: 15%;
+  margin-bottom: 10px;
 }
 
 canvas {
@@ -16,20 +14,21 @@ canvas {
   background-color: black;
 }
 
-#patInfo{
-    margin-bottom: 1%;
+#patInfo {
+  margin-bottom: 1%;
 }
-#vitalData{
-    font-size: 40px;
+#vitalData {
+  font-size: 60px;
 }
-#resp{
+#resp {
   margin-top: 20px;
-  height: 250px
+  height: 250px;
 }
-#pleth{
-    margin-top: 20px;
-    height: 250px
-  }
-  #vitalContainer{
-    margin-top:10px
-  }
+#pleth {
+  margin-top: 20px;
+  height: 250px;
+}
+#vitalContainer {
+  margin-top: 10px;
+  height: 150px;
+}
