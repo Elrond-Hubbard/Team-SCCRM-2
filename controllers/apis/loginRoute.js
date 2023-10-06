@@ -2,13 +2,8 @@ const router = require('express').Router()
 const { Doctor } = require('../../models/index')
 
 router.post('/', async (req, res) => {
-    try {
-        const userData = req.body.physicianID
-        res.json(userData)
-        return
-    } catch (err) {
-        res.status(400).json(err)
-    }
+    console.log(req.body.physicianID)
+    return
 })
 
 module.exports = router;

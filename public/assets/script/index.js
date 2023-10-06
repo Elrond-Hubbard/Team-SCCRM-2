@@ -7,7 +7,11 @@ const loginForm = async (event) => {
     
     // Send a POST to the API
     if (physicianID && password) {
-        const response = await fetch('/api/doctor/login')
+        const response = await fetch('/api/login/', {
+            method: 'POST',
+            body: JSON.stringify({physicianID, password}),
+            headers: { 'Content-Type': 'application/json'}
+        })
         console.log(response)
     } else {
         console.log('missing either ID or password')
