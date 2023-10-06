@@ -9,6 +9,11 @@
 
 }
 
+canvas {
+
+  background-color: black;
+}
+
 #patInfo{
     margin-bottom: 1%;
 }
