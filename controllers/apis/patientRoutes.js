@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const path = require('path')
-const { Doctor, Patient, Vitals } = require("../models/index");
+const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all patients using path /api/patient
 router.get("/", (req, res) => {
@@ -31,7 +31,9 @@ router.get("/", (req, res) => {
   });
   
   // Update patient info using api/patient/:id
-  router.put("/patient/:id", async (req, res) => {
+
+  // Still working on this one
+  router.put("/api/patient/", async (req, res) => {
     try {
       const updatedPatient = await Patient.update(
         {
@@ -66,7 +68,8 @@ router.get("/", (req, res) => {
       res.status(400).json(err);
     }
   });
-  
+
+module.exports = router;
 //   {
 //   	"firstName": "Steven",
 //   	"lastName": "Bunde",
