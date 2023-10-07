@@ -5,6 +5,11 @@ const bloodPressEl = document.querySelector('[name="mmHG"]');
 const bodyTempEl = document.querySelector('[name="Temp"]');
 const oxygenEl = document.querySelector('[name="O2"]');
 
+function getAllPatients(doctor_id) {
+  return fetch(`api/doctor/${doctor_id}/patient`)
+  .then((response) => response.json())
+}
+
 function getPatient(doctor_id, patient_id) {
   return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
     (response) => response.json()
@@ -29,7 +34,28 @@ function updatePatient(patient) {
   </ul>`;
 }
 
-getPatient(5, 5).then((patient) => {
+const doctorId = 2;
+
+const patientSelect = document.getElementById('patient-select')
+getAllPatients(doctorId)
+.then((patients) => {
+  patients.forEach((patient) => {
+    patientSelect.innerHTML += (`
+    <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
+    `)
+  })
+})
+
+patientSelect.addEventListener('change', () => {
+  getPatient(doctorId, patientSelect.value).then((patient) => {
+    console.log(patient)
+    updatePatient(patient);
+    const vitals = patient.vitals.pop();
+    updateMonitor(vitals);
+  });
+})
+
+getPatient(doctorId, 1).then((patient) => {
   updatePatient(patient);
   const vitals = patient.vitals.pop();
   updateMonitor(vitals);
@@ -60,35 +86,31 @@ const heartbeat = new Tone.Sequence(
   "4n"
 );
 
-// canvas draw coordinates
-const coord = {
+const pen = {
   x: 0,
   y: 0,
+  speed: 2
 };
 
 function animate() {
   // translucent mask painted over each frame to "fade out" point
   ctx.fillStyle = "rgba(0,0,0,0.01)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  // canvas cleared and point position reset when point reaches end of canvas
-  if (coord.x >= canvas.width) {
+  // canvas cleared and pen position reset when pen reaches end of canvas
+  if (pen.x >= canvas.width) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    coord.x = 0;
+    pen.x = 0;
   }
-
   ctx.beginPath();
-  ctx.moveTo(coord.x, coord.y);
-
-  // increment point position
-  coord.x += 2;
+  ctx.moveTo(pen.x, pen.y);
+  // increment pen position
+  pen.x += pen.speed;
   // y position determined by Tone.meter
-  coord.y = meter.getValue() * -1.5 + canvas.height / 3;
-
-  ctx.lineTo(coord.x, coord.y);
+  pen.y = meter.getValue() * -1.5 + canvas.height / 3;
+  ctx.lineTo(pen.x, pen.y);
   ctx.lineWidth = 3;
   ctx.strokeStyle = "lime";
   ctx.stroke();
-
   // run this function on each frame
   requestAnimationFrame(animate);
 }
