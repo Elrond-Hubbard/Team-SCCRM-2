@@ -28,5 +28,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
 sequelize.sync().then(() => {
-  app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
+  const server = app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
+  const io = require('socket.io')(server)
+  io.on('connection', (socket) => {
+    console.log(`User ${socket.id} connected to socket.`)
+  })
 });

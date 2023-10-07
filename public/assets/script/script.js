@@ -6,6 +6,9 @@ const timelineEl = document.getElementById("timeline");
 const patientInfoEl = document.getElementById("patInfo");
 const patientSelect = document.getElementById("patient-select");
 
+// Initialize socket
+const socket = io();
+
 // Call API to get list of current doctor's patients
 function getPatientList(doctor_id) {
   return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
