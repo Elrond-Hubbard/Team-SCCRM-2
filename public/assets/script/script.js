@@ -1,21 +1,26 @@
-const patientInfoEl = document.getElementById("patInfo");
-
 const heartRateEl = document.querySelector('[name="BPM"]');
 const bloodPressEl = document.querySelector('[name="mmHG"]');
 const bodyTempEl = document.querySelector('[name="Temp"]');
 const oxygenEl = document.querySelector('[name="O2"]');
+const timelineEl = document.getElementById("timeline");
+const patientInfoEl = document.getElementById("patInfo");
+const patientSelect = document.getElementById("patient-select");
 
-function getAllPatients(doctor_id) {
-  return fetch(`api/doctor/${doctor_id}/patient`)
-  .then((response) => response.json())
+// Call API to get list of current doctor's patients
+function getPatientList(doctor_id) {
+  return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
+    response.json()
+  );
 }
 
+// Call API to get one specified patient
 function getPatient(doctor_id, patient_id) {
   return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
     (response) => response.json()
   );
 }
 
+// Update vitals monitor to reflect most recent vitals data
 function updateMonitor(vitals) {
   heartRateEl.innerText = vitals.heartRate;
   bloodPressEl.innerText = `${vitals.systolic}|${vitals.diastolic}`;
@@ -24,6 +29,23 @@ function updateMonitor(vitals) {
   Tone.Transport.bpm.value = vitals.heartRate;
 }
 
+// Update timeline to list current patient's history
+function updateTimeline(vitals) {
+  timelineEl.innerHTML = ``;
+  vitals.forEach((entry) => {
+    timelineEl.innerHTML += `
+    <tr>
+    <td>${entry.heartRate}</td>
+    <td>${entry.systolic}|${entry.diastolic}</td>
+    <td>${entry.bodyTemp}</td>
+    <td>${entry.O2}%</td>
+    <td>${entry.createdAt}</td>
+    </tr>
+    `;
+  });
+}
+
+// Update patient info element
 function updatePatient(patient) {
   patientInfoEl.innerHTML = `
     <ul class="list-group list-group-flush">
@@ -34,31 +56,26 @@ function updatePatient(patient) {
   </ul>`;
 }
 
-const doctorId = 2;
+// Placeholder value until user auth works
+const doctorId = 4;
 
-const patientSelect = document.getElementById('patient-select')
-getAllPatients(doctorId)
-.then((patients) => {
+// The select menu is populated with a list of patients
+getPatientList(doctorId).then((patients) => {
   patients.forEach((patient) => {
-    patientSelect.innerHTML += (`
+    patientSelect.innerHTML += `
     <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
-    `)
-  })
-})
-
-patientSelect.addEventListener('change', () => {
-  getPatient(doctorId, patientSelect.value).then((patient) => {
-    console.log(patient)
-    updatePatient(patient);
-    const vitals = patient.vitals.pop();
-    updateMonitor(vitals);
+    `;
   });
-})
+});
 
-getPatient(doctorId, 1).then((patient) => {
-  updatePatient(patient);
-  const vitals = patient.vitals.pop();
-  updateMonitor(vitals);
+// When a patient is selected, update functions are called
+patientSelect.addEventListener("change", () => {
+  getPatient(doctorId, patientSelect.value).then((patient) => {
+    updatePatient(patient);
+    updateTimeline(patient.vitals);
+    const currentVitals = patient.vitals.pop();
+    updateMonitor(currentVitals);
+  });
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +106,7 @@ const heartbeat = new Tone.Sequence(
 const pen = {
   x: 0,
   y: 0,
-  speed: 2
+  speed: 2,
 };
 
 function animate() {
