@@ -16,11 +16,11 @@
     <header>
       <div>
         <h1>
-          <small class="text-muted">Team SCCRM</small>
+          <small class="text-muted">SCCRM Diagnostics</small>
         </h1>
       </div>
     </header>
-    <div id="patInfo" class="card" style="width: 16rem">
+    <div id="patInfo" class="card" style="width: 20rem">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Patient Name:</li>
         <li class="list-group-item">Age:</li>
@@ -28,7 +28,6 @@
         <li class="list-group-item">isSleepy:</li>
       </ul>
     </div>
-    <aside id="aside"></aside>
     <div id="mainContainer" class="container-fluid">
       <main>
         <div class="row row-cols-1 row-cols-md-4">
@@ -78,10 +77,21 @@
           <div class="col-lg-12 mb-3 mb--0">
             <div id="resp" class="card">
               <div class="card-body text-center">
-                <h5 class="card-title">RESP (Respiratory Rate Monitor)</h5>
-                <p name="respMonitorBody" class="card-text">
-                  Resp monitor animation
-                </p>
+                <h5 class="card-title">Timeline</h5>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Heart Rate</th>
+                      <th scope="col">Blood Pressure</th>
+                      <th scope="col">Temperature</th>
+                      <th scope="col">Oxygen</th>
+                      <th scope="col">Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="timeline">
+                    <!-- Vitals timeline displays here -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -102,6 +112,11 @@
         <input id="slider" type="range" min="20" max="150" value="70" />
       </section>
     </div>
+
+    <!-- Dropdown menu for selecting patients -->
+    <select id="patient-select" class="form-select w-25 mx-auto" aria-label="Default select example">
+      <option selected>Select a Patient</option>
+    </select>
 
     <script src="http://unpkg.com/tone"></script>
     <script src="./assets/script/script.js"></script>

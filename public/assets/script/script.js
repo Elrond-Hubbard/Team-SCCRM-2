@@ -1,16 +1,26 @@
-const patientInfoEl = document.getElementById("patInfo");
-
 const heartRateEl = document.querySelector('[name="BPM"]');
 const bloodPressEl = document.querySelector('[name="mmHG"]');
 const bodyTempEl = document.querySelector('[name="Temp"]');
 const oxygenEl = document.querySelector('[name="O2"]');
+const timelineEl = document.getElementById("timeline");
+const patientInfoEl = document.getElementById("patInfo");
+const patientSelect = document.getElementById("patient-select");
 
+// Call API to get list of current doctor's patients
+function getPatientList(doctor_id) {
+  return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
+    response.json()
+  );
+}
+
+// Call API to get one specified patient
 function getPatient(doctor_id, patient_id) {
   return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
     (response) => response.json()
   );
 }
 
+// Update vitals monitor to reflect most recent vitals data
 function updateMonitor(vitals) {
   heartRateEl.innerText = vitals.heartRate;
   bloodPressEl.innerText = `${vitals.systolic}|${vitals.diastolic}`;
@@ -19,6 +29,23 @@ function updateMonitor(vitals) {
   Tone.Transport.bpm.value = vitals.heartRate;
 }
 
+// Update timeline to list current patient's history
+function updateTimeline(vitals) {
+  timelineEl.innerHTML = ``;
+  vitals.forEach((entry) => {
+    timelineEl.innerHTML += `
+    <tr>
+    <td>${entry.heartRate}</td>
+    <td>${entry.systolic}|${entry.diastolic}</td>
+    <td>${entry.bodyTemp}</td>
+    <td>${entry.O2}%</td>
+    <td>${entry.createdAt}</td>
+    </tr>
+    `;
+  });
+}
+
+// Update patient info element
 function updatePatient(patient) {
   patientInfoEl.innerHTML = `
     <ul class="list-group list-group-flush">
@@ -29,10 +56,26 @@ function updatePatient(patient) {
   </ul>`;
 }
 
-getPatient(5, 5).then((patient) => {
-  updatePatient(patient);
-  const vitals = patient.vitals.pop();
-  updateMonitor(vitals);
+// Placeholder value until user auth works
+const doctorId = 4;
+
+// The select menu is populated with a list of patients
+getPatientList(doctorId).then((patients) => {
+  patients.forEach((patient) => {
+    patientSelect.innerHTML += `
+    <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
+    `;
+  });
+});
+
+// When a patient is selected, update functions are called
+patientSelect.addEventListener("change", () => {
+  getPatient(doctorId, patientSelect.value).then((patient) => {
+    updatePatient(patient);
+    updateTimeline(patient.vitals);
+    const currentVitals = patient.vitals.pop();
+    updateMonitor(currentVitals);
+  });
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -60,35 +103,31 @@ const heartbeat = new Tone.Sequence(
   "4n"
 );
 
-// canvas draw coordinates
-const coord = {
+const pen = {
   x: 0,
   y: 0,
+  speed: 2,
 };
 
 function animate() {
   // translucent mask painted over each frame to "fade out" point
   ctx.fillStyle = "rgba(0,0,0,0.01)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  // canvas cleared and point position reset when point reaches end of canvas
-  if (coord.x >= canvas.width) {
+  // canvas cleared and pen position reset when pen reaches end of canvas
+  if (pen.x >= canvas.width) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    coord.x = 0;
+    pen.x = 0;
   }
-
   ctx.beginPath();
-  ctx.moveTo(coord.x, coord.y);
-
-  // increment point position
-  coord.x += 2;
+  ctx.moveTo(pen.x, pen.y);
+  // increment pen position
+  pen.x += pen.speed;
   // y position determined by Tone.meter
-  coord.y = meter.getValue() * -1.5 + canvas.height / 3;
-
-  ctx.lineTo(coord.x, coord.y);
+  pen.y = meter.getValue() * -1.5 + canvas.height / 3;
+  ctx.lineTo(pen.x, pen.y);
   ctx.lineWidth = 3;
   ctx.strokeStyle = "lime";
   ctx.stroke();
-
   // run this function on each frame
   requestAnimationFrame(animate);
 }
