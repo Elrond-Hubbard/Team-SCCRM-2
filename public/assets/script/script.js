@@ -6,8 +6,21 @@ const timelineEl = document.getElementById("timeline");
 const patientInfoEl = document.getElementById("patInfo");
 const patientSelect = document.getElementById("patient-select");
 
+///////////////////////////////////////////////////////////////////////////////////////
+// WEBSOCKET CLIENT //
+///////////////////////////////////////////////////////////////////////////////////////
+const clientEl = document.getElementById('clients')
 // Initialize socket
 const socket = io();
+// listen for login/logout events defined in server.js and print client total
+socket.on('login', (data) => {
+  clientEl.innerText = `Clients Connected: ${data}`
+})
+socket.on('logout', (data) => {
+  clientEl.innerText = `Clients Connected: ${data}`
+})
+///////////////////////////////////////////////////////////////////////////////////////
+
 
 // Call API to get list of current doctor's patients
 function getPatientList(doctor_id) {
