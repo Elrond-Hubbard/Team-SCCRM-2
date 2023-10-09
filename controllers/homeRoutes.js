@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 
 // Get login page
-router.get("/login", (req, res) => {
+router.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "home.html"));
 });
 
