@@ -1,0 +1,14 @@
+body {
+    background-image: url('../img/doctors-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 670px;
+}
+
+header {
+    background-color: rgba(56, 108, 221, 0.5);
+}
+
+.logoCstm {
+    color: rgb(154, 255, 253)
+}
