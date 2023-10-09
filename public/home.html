@@ -20,6 +20,103 @@
         </h1>
         <h2 id="clients">Clients Connected:</h2>
       </div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add New Patient
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient Form</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="inputFirstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="inputFirstName">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputLastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="inputLastName">
+                </div>
+                <div class="col-12">
+                  <label for="inputAge" class="form-label">Age</label>
+                  <input type="number" class="form-control" min="0" max="100"id="inputAge" placeholder="0-100">
+                </div>
+                <div class="col-12">
+                  <label for="doctorNotes" class="form-label">Doctor's Notes</label>
+                  <input type="text"  class="form-control" rows="3" id="doctorNotes" >
+                </div>
+                <div class="col-12">
+                  <label for="inputWeight" class="form-label">Weight</label>
+                  <input type="number" class="form-control" min="1" max="750"id="inputWeight" placeholder="In Lbs">
+                </div>
+                <div class="col-md-6">
+                  <label for="initialBpm" class="form-label">Heart Rate</label>
+                  <input type="number" class="form-control" min="0" max="220" id="initialBpm" placeholder="Bpm">
+                </div>
+                <div class="col-md-6">
+                  <label for="initialSystolic" class="form-label">Blood Pressure</label>
+                  <input type="number" class="form-control" id="initialSystolic" placeholder="Systolic">
+                </div> 
+                <div class="col-md-6">
+                  <label for="initialDiastolic" class="form-label">Blood Pressure</label>
+                  <input type="number" class="form-control" id="initialDiastolic" placeholder="Diastolic">
+                </div>                                                                                                                                                                                        
+                <div class="col-md-6">
+                  <label for="initialTemp" class="form-label">Temperature</label>
+                  <input type="number" class="form-control" id="initialTemp" placeholder="In Farenheit">
+                </div>
+                <div class="col-md-6">
+                  <label for="initialSPO2" class="form-label">Oxygen Level</label>
+                  <input type="number" class="form-control" id="initialSPO2" placeholder="SpO2">
+                </div>
+                
+                
+                
+                <div class="col-12">
+                  <h3>Doctor Id</h3>
+                </div>
+                <div class="col-6">
+                  <!-- <label for="doctor_id" class="form-label"></label> -->
+                  <input type="number" class="form-control" min="0" max="100"id="doctor_id" >
+                </div>
+              
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save New Patient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Change Patient
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade flex" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Your Patients</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
     </header>
     <div id="patInfo" class="card" style="width: 20rem">
       <ul class="list-group list-group-flush">
