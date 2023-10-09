@@ -57,5 +57,10 @@ function onConnected(socket) {
     socketsConnected.delete(socket.id);
     io.emit('logout', socketsConnected.size)
   });
+  
+  // When vitals are recieved, they are broadcast to other clients
+  socket.on('vitals', (data) => {
+    socket.broadcast.emit('vitals', data)
+  })
 }
 //////////////////////////////////////////////////////////////////////////////
