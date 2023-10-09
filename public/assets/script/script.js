@@ -19,6 +19,14 @@ socket.on('login', (data) => {
 socket.on('logout', (data) => {
   clientEl.innerText = `Clients Connected: ${data}`
 })
+// send and receive heart rate value through socket
+function sendSocket(value) {
+  socket.emit('vitals', value)
+}
+socket.on('vitals', (data) => {
+  Tone.Transport.bpm.value = data;
+  heartRateEl.innerText = data;
+})
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -152,6 +160,7 @@ animate();
 
 slider.addEventListener("input", () => {
   Tone.Transport.bpm.value = slider.value;
+  sendSocket(slider.value)
 });
 
 button.addEventListener("click", () => {
