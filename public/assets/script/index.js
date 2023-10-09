@@ -12,7 +12,10 @@ const loginForm = async (event) => {
             body: JSON.stringify({physicianID, password}),
             headers: { 'Content-Type': 'application/json'}
         })
-        console.log(response)
+    // redirect with a successful login
+    if (response.ok) {
+        document.location.replace('/home')
+    }
     } else {
         console.log('missing either ID or password')
     }
