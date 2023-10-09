@@ -8,7 +8,7 @@ function rng(min, max) {
 }
 
 // edit i < x to change number of generated entries
-for (let i = 0; i < 45; i++) {
+for (let i = 0; i < 90; i++) {
   const entry = {
     systolic: rng(90, 140),
     diastolic: rng(60, 90),

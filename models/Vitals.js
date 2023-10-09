@@ -24,7 +24,7 @@ Vitals.init(
       type: DataTypes.INTEGER,
     },
     bodyTemp: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 1),
     },
     O2: {
       type: DataTypes.INTEGER,
