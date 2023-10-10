@@ -13,8 +13,8 @@ router.get("/home", (req, res) => {
 });
 
 // TEST ENDPOINT: IGNORE THIS
-router.get("/aside", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "aside.html"));
+router.get("/patsim", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "patsim.html"));
 });
 
 module.exports = router;

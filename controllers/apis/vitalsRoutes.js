@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { Doctor, Patient, Vitals } = require('../../models/index');
+const router = require("express").Router();
+const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all patient vitals
 router.get("/", (req, res) => {
@@ -18,10 +18,13 @@ router.put("/:id/patient/:patient_id/vitals", async (req, res) => {
   try {
     const updatedVitals = await Vitals.update(
       {
+        systolic: req.body.systolic,
+        diastolic: req.body.diastolic,
         heartRate: req.body.heartRate,
-        bloodPressure: req.body.bloodPressure,
-        temperature: req.body.temperature,
-        patient_id: req.params.patient_id,
+        respRate: req.body.respRate,
+        bodyTemp: req.body.bodyTemp,
+        O2: req.body.O2,
+        patient_id: req.body.patient_id,
       },
       {
         where: {
@@ -32,6 +35,24 @@ router.put("/:id/patient/:patient_id/vitals", async (req, res) => {
     res.status(200).json(updatedVitals);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const newVitals = await Vitals.create({
+      systolic: req.body.systolic,
+      diastolic: req.body.diastolic,
+      heartRate: req.body.heartRate,
+      respRate: req.body.respRate,
+      bodyTemp: req.body.bodyTemp,
+      O2: req.body.O2,
+      patient_id: req.body.patient_id,
+    });
+    res.status(200).json(newVitals);
+  } catch (err) {
+    res.status(400).json(err);
+    console.log(err)
   }
 });
 
