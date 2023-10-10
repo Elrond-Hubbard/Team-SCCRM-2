@@ -136,14 +136,14 @@ choosePatientBtn.addEventListener("click", () => {
   });
 });
 
-newPatientFormData.addEventListener('submit', (e) => {
-  e.preventDefault()
-  const fd = new FormData(newPatientFormData)
-  const obj = Object.fromEntries(fd)
+// newPatientFormData.addEventListener('submit', (e) => {
+//   e.preventDefault()
+//   const fd = new FormData(newPatientFormData)
+//   const obj = Object.fromEntries(fd)
 
-  const json = JSON.stringify(obj)
-  console.log(json)
-})
+//   const json = JSON.stringify(obj)
+//   console.log(json)
+// })
 
 
 // When a patient is selected, update functions are called
