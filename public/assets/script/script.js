@@ -5,7 +5,9 @@ const oxygenEl = document.querySelector('[name="O2"]');
 const timelineEl = document.getElementById("timeline");
 const patientInfoEl = document.getElementById("patInfo");
 const patientSelect = document.getElementById("patient-select");
-
+const patientDropdown = document.getElementById("patientDropdown")
+const choosePatientBtn = document.getElementById("choosePatientBtn")
+const choosePatientModal = document.getElementById("patientModal2")
 ///////////////////////////////////////////////////////////////////////////////////////
 // WEBSOCKET CLIENT //
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +39,11 @@ function getPatientList(doctor_id) {
   );
 }
 
+function getPatientDropdown(doctor_id) {
+  return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
+    response.json()
+  );
+}
 // Call API to get one specified patient
 function getPatient(doctor_id, patient_id) {
   return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
@@ -84,23 +91,58 @@ function updatePatient(patient) {
 const doctorId = 4;
 
 // The select menu is populated with a list of patients
-getPatientList(doctorId).then((patients) => {
+// getPatientList(doctorId).then((patients) => {
+//   patients.forEach((patient) => {
+//     patientSelect.innerHTML += `
+//     <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
+//     `;
+//   });
+// });
+
+getPatientDropdown(doctorId).then((patients) => {
   patients.forEach((patient) => {
-    patientSelect.innerHTML += `
+    patientDropdown.innerHTML += `
     <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
     `;
   });
 });
-
-// When a patient is selected, update functions are called
-patientSelect.addEventListener("change", () => {
-  getPatient(doctorId, patientSelect.value).then((patient) => {
-    updatePatient(patient);
+patientDropdown.addEventListener('click', () =>{
+  console.log(patientDropdown.value)
+  getPatient(doctorId, patientDropdown.value).then((patient) => {
+    getPatientDropdown()
+    
+  });
+})
+patientDropdown.addEventListener("change", function () {
+  console.log(patientDropdown.value)
+  if (patientDropdown.value !== "View Patients") {
+    choosePatientBtn.removeAttribute("disabled");
+  
+  } else {
+    choosePatientBtn.setAttribute("disabled", "true");
+  }
+});
+choosePatientBtn.addEventListener('click', ()=>{
+  getPatient(doctorId, patientDropdown.value).then((patient) => {
+    
+  updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals);
-  });
-});
+    
+    
+  })
+})
+
+// When a patient is selected, update functions are called
+// patientSelect.addEventListener("change", () => {
+//   getPatient(doctorId, patientSelect.value).then((patient) => {
+//     updatePatient(patient);
+//     updateTimeline(patient.vitals);
+//     const currentVitals = patient.vitals.pop();
+//     updateMonitor(currentVitals);
+//   });
+// });
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PULSE OXIMETER ANIMATION //

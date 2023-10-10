@@ -20,7 +20,7 @@
         </h1>
         <h2 id="clients">Clients Connected:</h2>
       </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" id="newPatientBtn"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add New Patient
       </button>
       
@@ -89,29 +89,32 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save New Patient</button>
+              <button id="savePatientBtn"type="button" class="btn btn-primary">Save New Patient</button>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#patientModal2">
         Change Patient
       </button>
       
       <!-- Modal -->
-      <div class="modal fade flex" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade flex" id="patientModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">Your Patients</h1>
+              
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              
-            </div>
+              <select id="patientDropdown" class="form-select w-50 " aria-label="Default select example">
+                <option selected>View Patients</option>
+              </select>
+          </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" id="choosePatientBtn" data-bs-dismiss="modal" class="btn btn-primary" disabled >Choose patient</button>
             </div>
           </div>
         </div>
@@ -219,10 +222,12 @@
     <script src="http://unpkg.com/tone"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./assets/script/script.js"></script>
+    <script src="./modal.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
-    ></script>
+    >
+  </script>
   </body>
 </html>
