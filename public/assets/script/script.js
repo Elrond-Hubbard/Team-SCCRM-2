@@ -5,32 +5,38 @@ const oxygenEl = document.querySelector('[name="O2"]');
 const timelineEl = document.getElementById("timeline");
 const patientInfoEl = document.getElementById("patInfo");
 const patientSelect = document.getElementById("patient-select");
-const patientDropdown = document.getElementById("patientDropdown")
-const choosePatientBtn = document.getElementById("choosePatientBtn")
-const choosePatientModal = document.getElementById("patientModal2")
+const patientDropdown = document.getElementById("patientDropdown");
+const choosePatientBtn = document.getElementById("choosePatientBtn");
+const choosePatientModal = document.getElementById("patientModal2");
 ///////////////////////////////////////////////////////////////////////////////////////
 // WEBSOCKET CLIENT //
 ///////////////////////////////////////////////////////////////////////////////////////
-const clientEl = document.getElementById('clients')
+const clientEl = document.getElementById("clients");
 // Initialize socket
 const socket = io();
 // listen for login/logout events defined in server.js and print client total
-socket.on('login', (data) => {
-  clientEl.innerText = `Clients Connected: ${data}`
-})
-socket.on('logout', (data) => {
-  clientEl.innerText = `Clients Connected: ${data}`
-})
-// send and receive heart rate value through socket
-function sendSocket(value) {
-  socket.emit('vitals', value)
-}
-socket.on('vitals', (data) => {
+socket.on("login", (data) => {
+  clientEl.innerText = `Clients Connected: ${data}`;
+});
+socket.on("logout", (data) => {
+  clientEl.innerText = `Clients Connected: ${data}`;
+});
+// receive heart rate value through socket
+socket.on("BPM", (data) => {
   Tone.Transport.bpm.value = data;
   heartRateEl.innerText = data;
-})
+});
+// listen for autoseed and update page
+socket.on("autoseed", (data) => {
+  console.log(data, 'client')
+  getPatient(doctorId, patientDropdown.value).then((patient) => {
+    updatePatient(patient);
+    updateTimeline(patient.vitals);
+    const currentVitals = patient.vitals.pop();
+    updateMonitor(currentVitals);
+  });
+});
 ///////////////////////////////////////////////////////////////////////////////////////
-
 
 // Call API to get list of current doctor's patients
 function getPatientList(doctor_id) {
@@ -63,7 +69,7 @@ function updateMonitor(vitals) {
 // Update timeline to list current patient's history
 function updateTimeline(vitals) {
   timelineEl.innerHTML = ``;
-  recentVitals = vitals.slice(Math.max(vitals.length - 5, 1))
+  recentVitals = vitals.slice(Math.max(vitals.length - 5, 1));
   recentVitals.forEach((entry) => {
     timelineEl.innerHTML += `
     <tr>
@@ -107,33 +113,28 @@ getPatientDropdown(doctorId).then((patients) => {
     `;
   });
 });
-patientDropdown.addEventListener('click', () =>{
-  console.log(patientDropdown.value)
+patientDropdown.addEventListener("click", () => {
+  console.log(patientDropdown.value);
   getPatient(doctorId, patientDropdown.value).then((patient) => {
-    getPatientDropdown()
-    
+    getPatientDropdown();
   });
-})
+});
 patientDropdown.addEventListener("change", function () {
-  console.log(patientDropdown.value)
+  console.log(patientDropdown.value);
   if (patientDropdown.value !== "View Patients") {
     choosePatientBtn.removeAttribute("disabled");
-  
   } else {
     choosePatientBtn.setAttribute("disabled", "true");
   }
 });
-choosePatientBtn.addEventListener('click', ()=>{
+choosePatientBtn.addEventListener("click", () => {
   getPatient(doctorId, patientDropdown.value).then((patient) => {
-    
-  updatePatient(patient);
+    updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals);
-    
-    
-  })
-})
+  });
+});
 
 // When a patient is selected, update functions are called
 // patientSelect.addEventListener("change", () => {
@@ -203,7 +204,7 @@ animate();
 
 slider.addEventListener("input", () => {
   Tone.Transport.bpm.value = slider.value;
-  sendSocket(slider.value)
+  sendSocket(slider.value);
 });
 
 button.addEventListener("click", () => {
