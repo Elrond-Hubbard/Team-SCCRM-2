@@ -63,7 +63,8 @@ function updateMonitor(vitals) {
 // Update timeline to list current patient's history
 function updateTimeline(vitals) {
   timelineEl.innerHTML = ``;
-  vitals.forEach((entry) => {
+  recentVitals = vitals.slice(Math.max(vitals.length - 5, 1))
+  recentVitals.forEach((entry) => {
     timelineEl.innerHTML += `
     <tr>
     <td>${entry.heartRate}</td>
