@@ -202,11 +202,6 @@ function animate() {
 
 animate();
 
-slider.addEventListener("input", () => {
-  Tone.Transport.bpm.value = slider.value;
-  sendSocket(slider.value);
-});
-
 button.addEventListener("click", () => {
   Tone.start();
   Tone.Transport.start(0);
