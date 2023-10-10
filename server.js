@@ -59,8 +59,14 @@ function onConnected(socket) {
   });
   
   // When vitals are recieved, they are broadcast to other clients
-  socket.on('vitals', (data) => {
-    socket.broadcast.emit('vitals', data)
+  socket.on('BPM', (data) => {
+    socket.broadcast.emit('BPM', data)
+  })
+
+  // When autoseed is triggered, broadcast event
+  socket.on('autoseed', (data) => {
+    console.log(data)
+    socket.broadcast.emit('autoseed', data)
   })
 }
 //////////////////////////////////////////////////////////////////////////////
