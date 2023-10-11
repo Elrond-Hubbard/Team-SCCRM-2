@@ -73,8 +73,14 @@ function onConnected(socket) {
     console.log(data)
     socket.broadcast.emit('autoseed', data)
   })
+
+  // ALERT TEST
+  socket.on('ALERT', (data) => {
+    sendAlert();
+  })
 }
 //////////////////////////////////////////////////////////////////////////////
+
 
 
 // TEXT NOTIFICATIONS //
@@ -114,4 +120,3 @@ async function sendSMS() {
     })
 }
 
-sendAlert();
