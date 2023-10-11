@@ -35,6 +35,10 @@ socket.on("autoseed", (data) => {
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals);
+    if (currentVitals.heartRate > 90) {
+      console.log("ALERT HAS BEEN CAUGHT...")
+      socket.emit("ALERT", data);
+    }
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////
