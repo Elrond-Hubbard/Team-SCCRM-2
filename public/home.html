@@ -97,46 +97,32 @@
           </div>
         </div>
       </div>
-
       
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#patientModal2">
-        Change Patient
-      </button>
       
-      <!-- Modal -->
-      <div class="modal fade flex" id="patientModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Your Patients</h1>
-              
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <select id="patientDropdown" class="form-select w-50 " aria-label="Default select example">
-                <option selected>View Patients</option>
-              </select>
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" id="choosePatientBtn" data-bs-dismiss="modal" class="btn btn-primary" disabled >Choose patient</button>
-            </div>
-          </div>
-        </div>
+      
+      <div id="patInfo" class="card" style="width: 20rem">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Patient Name:</li>
+          <li class="list-group-item">Age:</li>
+          <li class="list-group-item">Weight:</li>
+          <li class="list-group-item">isSleepy:</li>
+        </ul>
       </div>
-   
+      
+      
+      
     </header>
 
-    <div id="patInfo" class="card" style="width: 20rem">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Patient Name:</li>
-        <li class="list-group-item">Age:</li>
-        <li class="list-group-item">Weight:</li>
-        <li class="list-group-item">isSleepy:</li>
-      </ul>
+    
+    <main >
+      <div id="patientListDiv" class="card flex" style="width: 14rem;">
+      <div id="availablePatientList" class="list-group ">
+     
+                
+      </div>
     </div>
-    <div id="mainContainer" class="container-fluid">
-      <main>
+      <div id="mainContainer" class="container-fluid flex">
+        <div>
         <div class="row row-cols-1 row-cols-md-4">
           <div class="col">
             <div id="vitalContainer" class="card">
@@ -212,10 +198,12 @@
             </div>
           </div>
         </div>
-      </main>
+      </div>
       <section>
         <button id="button">start</button>
       </section>
+    </main>
+   
     </div>
 
     <script src="http://unpkg.com/tone"></script>
