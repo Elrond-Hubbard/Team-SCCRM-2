@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vonage/server-sdk": "^3.9.3",
     "bcrypt": "^5.1.1",
     "connect-session-sequelize": "^7.1.7",
     "dotenv": "^16.3.1",

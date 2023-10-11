@@ -1,9 +1,14 @@
+const { Vonage } = require("@vonage/server-sdk");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
 
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
+const { send } = require("process");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -64,3 +69,43 @@ function onConnected(socket) {
   })
 }
 //////////////////////////////////////////////////////////////////////////////
+
+
+// TEXT NOTIFICATIONS //
+const vonage = new Vonage({
+  apiKey: process.env.apiKEY,
+  apiSecret: process.env.apiSECRET,
+});
+
+const from = "13525040359";
+const to = process.env.PHONE_NUMBER;
+const text = "Hello from Vonage SMS API";
+
+async function sendSMS() {
+    await vonage.message.send({to, from, text})
+    .then((res) => { console.log('message sent sucessfully'); console.log(res)}) 
+    .catch((err) => { console.log('message failed'); console.log(err)});
+  }
+
+
+  function sendAlert() {
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's vitals are critical. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+}
+
+sendAlert();
