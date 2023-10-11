@@ -6,10 +6,11 @@ main{
   /* border: 2px solid black; */
   outline: 2px solid black;
   height: 100%;
-  max-width: 83%;
+  max-width: 1000px;
   /* margin-left: 15%; */
   float: right;
-  margin-right: 2%;
+  /* margin-right: 2%; */
+  margin: auto;
   margin-bottom: 10px;
 }
 
@@ -40,4 +41,5 @@ canvas {
 
 #patientListDiv{
   margin-right: 1%;
+  width: 20rem;
 }

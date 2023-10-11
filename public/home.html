@@ -18,7 +18,6 @@
         <h1>
           <small class="text-muted">SCCRM Diagnostics</small>
         </h1>
-        <h2 id="clients">Clients Connected:</h2>
       </div>
       <button type="button" id="newPatientBtn"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add New Patient
@@ -97,25 +96,11 @@
           </div>
         </div>
       </div>
-      
-      
-      
-      <div id="patInfo" class="card" style="width: 20rem">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Patient Name:</li>
-          <li class="list-group-item">Age:</li>
-          <li class="list-group-item">Weight:</li>
-          <li class="list-group-item">isSleepy:</li>
-        </ul>
-      </div>
-      
-      
-      
     </header>
 
     
     <main >
-      <div id="patientListDiv" class="card flex" style="width: 14rem;">
+      <div id="patientListDiv" class="card flex" style="width: 20rem;">
       <div id="availablePatientList" class="list-group ">
      
                 
@@ -123,6 +108,17 @@
     </div>
       <div id="mainContainer" class="container-fluid flex">
         <div>
+          <!-- PATIENT INFO HEADER -->
+          <table class="table table-striped">
+            <thead>
+              <tr id="patInfo" style="font-size: 30px;">
+                <th class="col-6" scope="col">Name: </th>
+                <th  scope="col-3">Age: </th>
+                <th  scope="col-3">Weight: </th>
+              </tr>
+            </thead>
+          </table>
+
         <div class="row row-cols-1 row-cols-md-4">
           <div class="col">
             <div id="vitalContainer" class="card">

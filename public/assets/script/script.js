@@ -8,36 +8,29 @@ const patientSelect = document.getElementById("patient-select");
 const patientDropdown = document.getElementById("patientDropdown");
 const choosePatientBtn = document.getElementById("choosePatientBtn");
 const choosePatientModal = document.getElementById("patientModal2");
-const choosePatientEl = document.getElementById("availablePatientList")
+const choosePatientEl = document.getElementById("availablePatientList");
 ///////////////////////////////////////////////////////////////////////////////////////
 // WEBSOCKET CLIENT //
 ///////////////////////////////////////////////////////////////////////////////////////
 const clientEl = document.getElementById("clients");
 // Initialize socket
 const socket = io();
-// listen for login/logout events defined in server.js and print client total
-socket.on("login", (data) => {
-  clientEl.innerText = `Clients Connected: ${data}`;
-});
-socket.on("logout", (data) => {
-  clientEl.innerText = `Clients Connected: ${data}`;
-});
 // receive heart rate value through socket
 socket.on("BPM", (data) => {
   Tone.Transport.bpm.value = data;
   heartRateEl.innerText = data;
 });
-let patientId = 1
+let patientId = 1;
 // listen for autoseed and update page
 socket.on("autoseed", (data) => {
-  console.log(data, 'client')
+  console.log(data, "client");
   getPatient(doctorId, patientId).then((patient) => {
     updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals);
     if (currentVitals.heartRate > 90) {
-      console.log("ALERT HAS BEEN CAUGHT...")
+      console.log("ALERT HAS BEEN CAUGHT...");
       socket.emit("ALERT", data);
     }
   });
@@ -92,18 +85,13 @@ function updateTimeline(vitals) {
 // Update patient info element
 function updatePatient(patient) {
   patientInfoEl.innerHTML = `
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item">Patient Name: ${patient.firstName} ${patient.lastName}</li>
-    <li class="list-group-item">Age: ${patient.age}</li>
-    <li class="list-group-item">Weight: ${patient.weight}</li>
-    <li class="list-group-item">isSleepy:</li>
-  </ul>`;
+  <th class="col-6" scope="col">Name: ${patient.firstName} ${patient.lastName}</th>
+  <th class="col-3" scope="col">Age: ${patient.age}</th>
+  <th class="col-3" scope="col">Weight: ${patient.weight}</th>`
 }
 
 // Placeholder value until user auth works
 const doctorId = 4;
-
-
 
 getPatientDropdown(doctorId).then((patients) => {
   patients.forEach((patient) => {
@@ -113,7 +101,7 @@ getPatientDropdown(doctorId).then((patients) => {
   });
 });
 // create variable to store previous target
-let previousTarget = null
+let previousTarget = null;
 
 choosePatientEl.addEventListener("click", (event) => {
   if (event.target && event.target.nodeName === "A") {
@@ -125,23 +113,21 @@ choosePatientEl.addEventListener("click", (event) => {
       previousTarget.classList.remove("active");
     }
     // adds the class active to the currently selected <a> tag
-    event.target.classList.add('active')
+    event.target.classList.add("active");
     // sets current target as previous target to be used the next time a tag is clicked
-    previousTarget = event.target
+    previousTarget = event.target;
     // updates patient timeline, vitals, monitor, patient list. also starts the hearbeat animation
     getPatient(doctorId, patientId).then((patient) => {
       updatePatient(patient);
-    updateTimeline(patient.vitals);
-    const currentVitals = patient.vitals.pop();
-    updateMonitor(currentVitals);
-    Tone.start();
-  Tone.Transport.start(0);
-  heartbeat.start(0);
+      updateTimeline(patient.vitals);
+      const currentVitals = patient.vitals.pop();
+      updateMonitor(currentVitals);
+      Tone.start();
+      Tone.Transport.start(0);
+      heartbeat.start(0);
     });
   }
 });
-
-
 
 // newPatientFormData.addEventListener('submit', (e) => {
 //   e.preventDefault()
@@ -151,9 +137,6 @@ choosePatientEl.addEventListener("click", (event) => {
 //   const json = JSON.stringify(obj)
 //   console.log(json)
 // })
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PULSE OXIMETER ANIMATION //
@@ -165,6 +148,10 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = containerEl.offsetWidth;
 canvas.height = containerEl.offsetHeight;
+window.addEventListener("resize", () => {
+  canvas.width = containerEl.offsetWidth;
+  canvas.height = containerEl.offsetHeight;
+});
 
 // HEARTBEAT
 // Transport.bpm = patient_db/vitals/heartRate
