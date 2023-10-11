@@ -27,10 +27,11 @@ socket.on("BPM", (data) => {
   Tone.Transport.bpm.value = data;
   heartRateEl.innerText = data;
 });
+let patientId = 1
 // listen for autoseed and update page
 socket.on("autoseed", (data) => {
   console.log(data, 'client')
-  getPatient(doctorId, patientDropdown.value).then((patient) => {
+  getPatient(doctorId, patientId).then((patient) => {
     updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
@@ -117,7 +118,7 @@ let previousTarget = null
 choosePatientEl.addEventListener("click", (event) => {
   if (event.target && event.target.nodeName === "A") {
     // Check if the clicked element is an <a> tag
-    const patientId = event.target.id;
+    patientId = event.target.id;
     console.log(patientId);
     // attempts to remove active from previous target if it exists
     if (previousTarget) {
