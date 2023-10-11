@@ -8,6 +8,7 @@ const patientSelect = document.getElementById("patient-select");
 const patientDropdown = document.getElementById("patientDropdown");
 const choosePatientBtn = document.getElementById("choosePatientBtn");
 const choosePatientModal = document.getElementById("patientModal2");
+const choosePatientEl = document.getElementById("availablePatientList")
 ///////////////////////////////////////////////////////////////////////////////////////
 // WEBSOCKET CLIENT //
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -97,44 +98,45 @@ function updatePatient(patient) {
 // Placeholder value until user auth works
 const doctorId = 4;
 
-// The select menu is populated with a list of patients
-// getPatientList(doctorId).then((patients) => {
-//   patients.forEach((patient) => {
-//     patientSelect.innerHTML += `
-//     <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
-//     `;
-//   });
-// });
+
 
 getPatientDropdown(doctorId).then((patients) => {
   patients.forEach((patient) => {
-    patientDropdown.innerHTML += `
-    <option value="${patient.id}">${patient.lastName}, ${patient.firstName}</option>
+    choosePatientEl.innerHTML += `
+    <a href="#" class="list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
     `;
   });
 });
-patientDropdown.addEventListener("click", () => {
-  console.log(patientDropdown.value);
-  getPatient(doctorId, patientDropdown.value).then((patient) => {
-    getPatientDropdown();
-  });
-});
-patientDropdown.addEventListener("change", function () {
-  console.log(patientDropdown.value);
-  if (patientDropdown.value !== "View Patients") {
-    choosePatientBtn.removeAttribute("disabled");
-  } else {
-    choosePatientBtn.setAttribute("disabled", "true");
-  }
-});
-choosePatientBtn.addEventListener("click", () => {
-  getPatient(doctorId, patientDropdown.value).then((patient) => {
-    updatePatient(patient);
+// create variable to store previous target
+let previousTarget = null
+
+choosePatientEl.addEventListener("click", (event) => {
+  if (event.target && event.target.nodeName === "A") {
+    // Check if the clicked element is an <a> tag
+    const patientId = event.target.id;
+    console.log(patientId);
+    // attempts to remove active from previous target if it exists
+    if (previousTarget) {
+      previousTarget.classList.remove("active");
+    }
+    // adds the class active to the currently selected <a> tag
+    event.target.classList.add('active')
+    // sets current target as previous target to be used the next time a tag is clicked
+    previousTarget = event.target
+    // updates patient timeline, vitals, monitor, patient list. also starts the hearbeat animation
+    getPatient(doctorId, patientId).then((patient) => {
+      updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals);
-  });
+    Tone.start();
+  Tone.Transport.start(0);
+  heartbeat.start(0);
+    });
+  }
 });
+
+
 
 // newPatientFormData.addEventListener('submit', (e) => {
 //   e.preventDefault()
@@ -146,15 +148,7 @@ choosePatientBtn.addEventListener("click", () => {
 // })
 
 
-// When a patient is selected, update functions are called
-// patientSelect.addEventListener("change", () => {
-//   getPatient(doctorId, patientSelect.value).then((patient) => {
-//     updatePatient(patient);
-//     updateTimeline(patient.vitals);
-//     const currentVitals = patient.vitals.pop();
-//     updateMonitor(currentVitals);
-//   });
-// });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PULSE OXIMETER ANIMATION //
