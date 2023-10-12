@@ -44,14 +44,14 @@ function getPatientList(doctor_id) {
   );
 }
 
-function getPatientDropdown(doctor_id) {
-  return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
+function getPatientDropdown() {
+  return fetch(`api/patient`).then((response) =>
     response.json()
   );
 }
 // Call API to get one specified patient
-function getPatient(doctor_id, patient_id) {
-  return fetch(`/api/doctor/${doctor_id}/patient/${patient_id}`).then(
+function getPatient(patient_id) {
+  return fetch(`/api/patient/${patient_id}`).then(
     (response) => response.json()
   );
 }
@@ -91,9 +91,9 @@ function updatePatient(patient) {
 }
 
 // Placeholder value until user auth works
-const doctorId = 4;
+// const doctorId = 4;
 
-getPatientDropdown(doctorId).then((patients) => {
+getPatientDropdown().then((patients) => {
   patients.forEach((patient) => {
     choosePatientEl.innerHTML += `
     <a href="#" class="w-100 list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
@@ -117,7 +117,7 @@ choosePatientEl.addEventListener("click", (event) => {
     // sets current target as previous target to be used the next time a tag is clicked
     previousTarget = event.target;
     // updates patient timeline, vitals, monitor, patient list. also starts the hearbeat animation
-    getPatient(doctorId, patientId).then((patient) => {
+    getPatient(patientId).then((patient) => {
       updatePatient(patient);
       updateTimeline(patient.vitals);
       const currentVitals = patient.vitals.pop();
