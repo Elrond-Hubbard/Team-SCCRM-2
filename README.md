@@ -3,7 +3,7 @@
 ## Deployed Link
 https://sccrm-diagnostics-7fb52a7a34b8.herokuapp.com/
 
-![alt text](public/assets/img/doctors-background.jpg)
+![alt text](public/assets/img/screenshot.jpg)
 
 ## Description
 
