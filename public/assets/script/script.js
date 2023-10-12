@@ -24,7 +24,7 @@ let patientId = 1;
 // listen for autoseed and update page
 socket.on("autoseed", (data) => {
   console.log(data, "client");
-  getPatient(doctorId, patientId).then((patient) => {
+  getPatient(patientId).then((patient) => {
     updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
