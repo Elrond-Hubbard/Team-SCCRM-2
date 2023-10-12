@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const path = require('path')
+const authCheck = require('../utils/helpers')
 const { Doctor, Patient, Vitals } = require("../models/index");
 
-// Get homepage
+// Get login page
 router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
-// Get login page
-router.get("/home", (req, res) => {
+// Get home page
+router.get("/home", authCheck, (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "home.html"));
 });
 

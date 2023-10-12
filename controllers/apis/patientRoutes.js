@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const path = require('path')
+const authCheck = require('../../utils/helpers')
 const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all patients using path /api/patient
-router.get("/", (req, res) => {
+router.get("/", authCheck, (req, res) => {
     Patient.findAll().then((data) => res.json(data));
   });
   
   // Get one patient using api/patient/:id
-  router.get("/:id", (req, res) => {
+  router.get("/:id", authCheck, (req, res) => {
     Patient.findOne({ where: { id: req.params.id }, include: [Vitals] }).then((data) =>
       res.json(data)
     );
