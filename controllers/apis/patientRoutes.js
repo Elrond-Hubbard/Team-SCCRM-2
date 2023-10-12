@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   
   // Get one patient using api/patient/:id
   router.get("/:id", (req, res) => {
-    Patient.findOne({ where: { id: req.params.id } }).then((data) =>
+    Patient.findOne({ where: { id: req.params.id }, include: [Vitals] }).then((data) =>
       res.json(data)
     );
   });
