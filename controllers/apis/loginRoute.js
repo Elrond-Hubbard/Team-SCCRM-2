@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const path = require('path')
 const { Doctor } = require('../../models/index')
 
 router.post('/', async (req, res) => {
