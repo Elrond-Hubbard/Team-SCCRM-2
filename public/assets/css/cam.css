@@ -1,16 +1,31 @@
+body {
+  background-image: url('../img/surgeon.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+header {
+  background-color: rgba(56, 108, 221, 0.5);
+}
+.logoCstm {
+  color: rgb(154, 255, 253)
+}
+
 main{
   display: flex;
+  height: 100%;
+  max-width: 1400px;
+  background-color: white;
+  padding-top: 2rem;
 }
-#mainContainer {
 
-  /* border: 2px solid black; */
+#mainContainer {
   outline: 2px solid black;
   height: 100%;
   max-width: 1000px;
-  /* margin-left: 15%; */
   float: right;
-  /* margin-right: 2%; */
-  margin: auto;
+  /* margin: auto; */
   margin-bottom: 10px;
 }
 

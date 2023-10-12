@@ -12,100 +12,98 @@
     <link rel="stylesheet" href="./assets/css/cam.css" />
     <title>Document</title>
   </head>
-  <body>
-    <header>
-      <div>
-        <h1>
-          <small class="text-muted">SCCRM Diagnostics</small>
-        </h1>
-      </div>
-      <button type="button" id="newPatientBtn"class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add New Patient
-      </button>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient Form</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form id="newPatientForm" class="row g-3">
-                <div class="col-md-6">
-                  <label for="inputFirstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" name="inputFirstName">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputLastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" name="inputLastName">
-                </div>
-                <div class="col-12">
-                  <label for="inputAge" class="form-label">Age</label>
-                  <input type="number" class="form-control" min="0" max="100"name="inputAge" placeholder="0-100">
-                </div>
-                <div class="col-12">
-                  <label for="doctorNotes" class="form-label">Doctor's Notes</label>
-                  <input type="text"  class="form-control" rows="3" name="doctorNotes" >
-                </div>
-                <div class="col-12">
-                  <label for="inputWeight" class="form-label">Weight</label>
-                  <input type="number" class="form-control" min="1" max="750"name="inputWeight" placeholder="In Lbs">
-                </div>
-                <div class="col-md-6">
-                  <label for="initialBpm" class="form-label">Heart Rate</label>
-                  <input type="number" class="form-control" min="0" max="220" name="initialBpm" placeholder="Bpm">
-                </div>
-                <div class="col-md-6">
-                  <label for="initialSystolic" class="form-label">Blood Pressure</label>
-                  <input type="number" class="form-control" name="initialSystolic" placeholder="Systolic">
-                </div> 
-                <div class="col-md-6">
-                  <label for="initialDiastolic" class="form-label">Blood Pressure</label>
-                  <input type="number" class="form-control" name="initialDiastolic" placeholder="Diastolic">
-                </div>                                                                                                                                                                                        
-                <div class="col-md-6">
-                  <label for="initialTemp" class="form-label">Temperature</label>
-                  <input type="number" class="form-control" name="initialTemp" placeholder="In Farenheit">
-                </div>
-                <div class="col-md-6">
-                  <label for="initialSPO2" class="form-label">Oxygen Level</label>
-                  <input type="number" class="form-control" name="initialSPO2" placeholder="SpO2">
-                </div>
-                
-                
-                
-                <div class="col-12">
-                  <h3>Doctor Id</h3>
-                </div>
-                <div class="col-6">
-                  <!-- <label for="doctor_id" class="form-label"></label> -->
-                  <input type="number" class="form-control" min="0" max="100"id="doctor_id" >
-                </div>
 
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" id="formClose" data-bs-dismiss="modal">Close</button>
-                  <button id="savePatientBtn" type="submit" value="Submit" class="btn btn-primary">Save New Patient</button>
-                </div>
-              </form>
-              
-              </div>
-              
-          </div>
-        </div>
+  <body>
+
+    <header>
+      <div class="col-10 mx-auto py-3">
+        <h1 class="display-2 logoCstm">SCCRM |
+          <small class="text-white">Health</small><small class="logoCstm"><strong>care</strong></small>
+        </h1>
       </div>
     </header>
 
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient Form</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="newPatientForm" class="row g-3">
+                    <div class="col-md-6">
+                      <label for="inputFirstName" class="form-label">First Name</label>
+                      <input type="text" class="form-control" name="inputFirstName">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputLastName" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" name="inputLastName">
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAge" class="form-label">Age</label>
+                      <input type="number" class="form-control" min="0" max="100"name="inputAge" placeholder="0-100">
+                    </div>
+                    <div class="col-12">
+                      <label for="doctorNotes" class="form-label">Doctor's Notes</label>
+                      <input type="text"  class="form-control" rows="3" name="doctorNotes" >
+                    </div>
+                    <div class="col-12">
+                      <label for="inputWeight" class="form-label">Weight</label>
+                      <input type="number" class="form-control" min="1" max="750"name="inputWeight" placeholder="In Lbs">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="initialBpm" class="form-label">Heart Rate</label>
+                      <input type="number" class="form-control" min="0" max="220" name="initialBpm" placeholder="Bpm">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="initialSystolic" class="form-label">Blood Pressure</label>
+                      <input type="number" class="form-control" name="initialSystolic" placeholder="Systolic">
+                    </div> 
+                    <div class="col-md-6">
+                      <label for="initialDiastolic" class="form-label">Blood Pressure</label>
+                      <input type="number" class="form-control" name="initialDiastolic" placeholder="Diastolic">
+                    </div>                                                                                                                                                                                        
+                    <div class="col-md-6">
+                      <label for="initialTemp" class="form-label">Temperature</label>
+                      <input type="number" class="form-control" name="initialTemp" placeholder="In Farenheit">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="initialSPO2" class="form-label">Oxygen Level</label>
+                      <input type="number" class="form-control" name="initialSPO2" placeholder="SpO2">
+                    </div>
+                    
+                    <div class="col-12">
+                      <h3>Doctor Id</h3>
+                    </div>
+
+                    <div class="col-6">
+                      <!-- <label for="doctor_id" class="form-label"></label> -->
+                      <input type="number" class="form-control" min="0" max="100"id="doctor_id" >
+                    </div>
     
-    <main >
-      <div id="patientListDiv" class="card flex" style="width: 20rem;">
-      <div id="availablePatientList" class="list-group ">
-     
-                
-      </div>
-    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" id="formClose" data-bs-dismiss="modal">Close</button>
+                      <button id="savePatientBtn" type="submit" value="Submit" class="btn btn-primary">Save New Patient</button>
+                    </div>
+                  </form>
+          
+                  </div>
+              </div>
+            </div>
+          </div>
+
+    <main class="mx-auto">
+
+      <section id="patientListDiv" class="card d-flex h-100" style="width: 20rem;">
+        <div id="availablePatientList" class="list-group ">
+          <button type="button" id="newPatientBtn"class="btn w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add New Patient
+          </button>
+        </div>
+      </section>
+
       <div id="mainContainer" class="container-fluid flex">
         <div>
           <!-- PATIENT INFO HEADER -->
@@ -196,7 +194,6 @@
         </div>
       </div>
       <section>
-        <button id="button">start</button>
       </section>
     </main>
    

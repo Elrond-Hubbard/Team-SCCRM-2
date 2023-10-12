@@ -68,7 +68,7 @@ function updateMonitor(vitals) {
 // Update timeline to list current patient's history
 function updateTimeline(vitals) {
   timelineEl.innerHTML = ``;
-  recentVitals = vitals.slice(Math.max(vitals.length - 5, 1));
+  recentVitals = vitals.slice(Math.max(vitals.length - 10, 1));
   recentVitals.forEach((entry) => {
     timelineEl.innerHTML += `
     <tr>
@@ -85,7 +85,7 @@ function updateTimeline(vitals) {
 // Update patient info element
 function updatePatient(patient) {
   patientInfoEl.innerHTML = `
-  <th class="col-6" scope="col">Name: ${patient.firstName} ${patient.lastName}</th>
+  <th class="col-6" scope="col">${patient.firstName} ${patient.lastName}</th>
   <th class="col-3" scope="col">Age: ${patient.age}</th>
   <th class="col-3" scope="col">Weight: ${patient.weight}</th>`
 }
@@ -96,7 +96,7 @@ const doctorId = 4;
 getPatientDropdown(doctorId).then((patients) => {
   patients.forEach((patient) => {
     choosePatientEl.innerHTML += `
-    <a href="#" class="list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
+    <a href="#" class="w-100 list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
     `;
   });
 });
@@ -197,9 +197,3 @@ function animate() {
 }
 
 animate();
-
-button.addEventListener("click", () => {
-  Tone.start();
-  Tone.Transport.start(0);
-  heartbeat.start(0);
-});
