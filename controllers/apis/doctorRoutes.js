@@ -3,12 +3,12 @@ const authCheck = require('../../utils/helpers')
 const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all doctors
-router.get("/", authCheck, (req, res) => {
+router.get("/", (req, res) => {
   Doctor.findAll().then((data) => res.json(data));
 });
 
 // Get one doctor
-router.get("/:id", authCheck, (req, res) => {
+router.get("/:id", (req, res) => {
   Doctor.findOne({ where: { id: req.params.id } }).then((data) =>
     res.json(data)
   );
