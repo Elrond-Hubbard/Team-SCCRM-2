@@ -28,10 +28,30 @@ socket.on("autoseed", (data) => {
     updatePatient(patient);
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
-    updateMonitor(currentVitals);
-    if (currentVitals.heartRate > 90) {
-      console.log("ALERT HAS BEEN CAUGHT...");
-      socket.emit("ALERT", data);
+    updateMonitor(currentVitals); 
+    if (currentVitals.heartRate > 100 || currentVitals.heartRate < 60) 
+    {
+      socket.emit("HRALERT", data) 
+    }
+    if (currentVitals.respRate > 20 || currentVitals.respRate < 12)
+    {
+      socket.emit("RRALERT", data)
+    }
+    if (currentVitals.systolic > 120 || currentVitals.diastolic > 90) 
+    {
+    socket.emit("HIGHBPALERT", data)
+    }
+    if (currentVitals.systolic < 90 || currentVitals.diastolic < 60) 
+    {
+    socket.emit("LOWBPALERT", data)
+    }
+    if (currentVitals.bodyTemp > 100 || currentVitals.bodyTemp < 95)
+    {
+    socket.emit("TEMPALERT", data)
+    }
+    if (currentVitals.O2 < 90 || currentVitals.O2 > 100) 
+    {
+    socket.emit("O2ALERT", data)
     }
   });
 });
