@@ -4,12 +4,12 @@ const authCheck = require('../../utils/helpers')
 const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all patients using path /api/patient
-router.get("/", (req, res) => {
+router.get("/", authCheck, (req, res) => {
     Patient.findAll().then((data) => res.json(data));
   });
   
   // Get one patient using api/patient/:id
-  router.get("/:id", (req, res) => {
+  router.get("/:id", authCheck, (req, res) => {
     Patient.findOne({ where: { id: req.params.id }, include: [Vitals] }).then((data) =>
       res.json(data)
     );
@@ -18,18 +18,41 @@ router.get("/", (req, res) => {
   // Create new patient using api/patient
   router.post("/", async (req, res) => {
     try {
+      const newPatientData = req.body
+
       const newPatient = await Patient.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        weight: req.body.weight,
-        doctor_id: req.body.doctor_id,
+        firstName: newPatientData.firstName,
+        lastName: newPatientData.lastName,
+        age: newPatientData.age,
+        weight: newPatientData.weight,
+        doctor_id: newPatientData.doctor_id,
+        systolic: newPatientData.systolic,
+        diastolic: newPatientData.diastolic,
+        heartRate: newPatientData.heartRate,
+        bodyTemp: newPatientData.bodyTemp,
+        O2: newPatientData.O2,
       });
+
+      // const newVitals = await Vitals.create({
+      //   patient_id: newPatient.id,
+      //    firstName: newPatientData.firstName,
+      //    lastName: newPatientData.lastName,
+      //    age: newPatientData.age,
+      //    weight: newPatientData.weight,
+      //    doctor_id: newPatientData.doctor_id,
+      //    systolic: newPatientData.systolic,
+      //    diastolic: newPatientData.diastolic,
+      //    heartRate: newPatientData.heartRate,
+      //    bodyTemp: newPatientData.bodyTemp,
+      //    O2: newPatientData.O2,
+    // })
       res.status(200).json(newPatient);
+      // res.status(200).json(newVitals);
     } catch (err) {
       res.status(400).json(err);
     }
   });
+
   
   // Update patient info using api/patient/:id
   router.put("/:id", async (req, res) => {
@@ -69,4 +92,3 @@ router.get("/", (req, res) => {
   });
 
 module.exports = router;
-

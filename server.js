@@ -50,7 +50,7 @@ let socketsConnected = new Set();
 io.on("connection", onConnected);
 
 // onConnected handles 
-function onConnected(socket) {
+function onConnected(socket) { //q: what line should the onConnected
   console.log(`User ${socket.id} connected to socket.`);
   socketsConnected.add(socket.id);
 
@@ -74,16 +74,41 @@ function onConnected(socket) {
     socket.broadcast.emit('autoseed', data)
   })
 
-  // ALERT TEST
-  socket.on('ALERT', (data) => {
-    sendAlert();
+  // HR ALERT 
+  socket.on('HRALERT', (data) => {
+    sendHRAlert();
+  })
+
+  // RR ALERT
+  socket.on('RRALERT', (data) => {
+    sendRRAlert();
+  })
+
+  // HIGH BP ALERT
+  socket.on('HIGHBPALERT', (data) => {
+    sendHIGHBPAlert();
+  })
+
+  // LOW BP ALERT
+  socket.on('LOWBPALERT', (data) => {
+    sendLOWBPAlert();
+  })
+
+  // TEMP ALERT
+  socket.on('TEMPALERT', (data) => {
+    sendTEMPAlert();
+  })
+
+  // O2 ALERT
+  socket.on('O2ALERT', (data) => {
+    sendO2Alert();
   })
 }
 //////////////////////////////////////////////////////////////////////////////
 
 
 
-// TEXT NOTIFICATIONS //
+// TEXT ALERT NOTIFICATIONS //
 const vonage = new Vonage({
   apiKey: process.env.apiKEY,
   apiSecret: process.env.apiSECRET,
@@ -99,8 +124,8 @@ async function sendSMS() {
     .catch((err) => { console.log('message failed'); console.log(err)});
   }
 
-
-  function sendAlert() {
+// ABNORMAL HR ALERT
+  function sendHRAlert() {
     const SCCRMALERT = from;
 
     fetch('https://rest.nexmo.com/sms/json', {
@@ -113,10 +138,114 @@ async function sendSMS() {
         body: JSON.stringify({
             "from": SCCRMALERT,
             "to": process.env.PHONE_NUMBER,
-            "text": "Patient's vitals are critical. Please check on them!" 
+            "text": "Patient's heart rate is abnormal. Please check on them!" 
         })
     }).then(res => {
         console.log(res);
     })
-}
+  }
 
+// ABNORMAL RR ALERT
+  function sendRRAlert() {
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's respiratory rate is abnormal. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+  }
+
+// ABNORMAL HIGH BP ALERT
+  function sendHIGHBPAlert() { 
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's blood pressure is abnormally HIGH. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+  }
+
+// ABNORMAL LOW BP ALERT
+  function sendLOWBPAlert() {
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's blood pressure is abnormally LOW. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+  }
+
+// ABNORMAL TEMP ALERT
+  function sendTEMPAlert() {
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's body temperature is abnormal. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+  }
+
+// ABNORMAL O2 ALERT
+  function sendO2Alert() {
+    const SCCRMALERT = from;
+
+    fetch('https://rest.nexmo.com/sms/json', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from('f7192272:gND758JNRn6JFNJo').toString('base64')
+        },
+        body: JSON.stringify({
+            "from": SCCRMALERT,
+            "to": process.env.PHONE_NUMBER,
+            "text": "Patient's oxygen level is abnormal. Please check on them!" 
+        })
+    }).then(res => {
+        console.log(res);
+    })
+  }
