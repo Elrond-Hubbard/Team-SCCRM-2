@@ -26,11 +26,11 @@ router.get("/", (req, res) => {
         age: newPatientData.age,
         weight: newPatientData.weight,
         doctor_id: newPatientData.doctor_id,
-        systolic: newPatientData.systolic,
-        diastolic: newPatientData.diastolic,
-        heartRate: newPatientData.heartRate,
-        bodyTemp: newPatientData.bodyTemp,
-        O2: newPatientData.O2,
+        // systolic: newPatientData.systolic,
+        // diastolic: newPatientData.diastolic,
+        // heartRate: newPatientData.heartRate,
+        // bodyTemp: newPatientData.bodyTemp,
+        // O2: newPatientData.O2,
       });
 
       // const newVitals = await Vitals.create({
