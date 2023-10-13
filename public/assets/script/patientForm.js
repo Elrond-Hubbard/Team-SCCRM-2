@@ -1,4 +1,3 @@
-
 const newPatientForm = document.getElementById('newPatientForm')
 let newPatientFormData = {}
 
@@ -28,6 +27,15 @@ newPatientForm.addEventListener('submit', async (e) => {
   } catch (err) {
     console.error(err);
   }
+  
+  choosePatientEl.innerHTML = ``;
+  getPatientDropdown().then((patients) => {
+    patients.forEach((patient) => {
+      choosePatientEl.innerHTML += `
+      <a href="#" class="w-100 list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
+      `;
+    });
+  });
 });
 
 
