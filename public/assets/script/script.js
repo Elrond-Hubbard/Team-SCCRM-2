@@ -9,6 +9,25 @@ const patientDropdown = document.getElementById("patientDropdown");
 const choosePatientBtn = document.getElementById("choosePatientBtn");
 const choosePatientModal = document.getElementById("patientModal2");
 const choosePatientEl = document.getElementById("availablePatientList");
+const logoutEl = document.getElementById('logoutBtn')
+
+// logout logic
+const logoutScript = async () => {
+  const response = await fetch('api/logout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json'}
+  });
+
+  if (response.ok) {
+    document.location.replace('/');
+  } else {
+    console.log('There was an error...')
+    return;
+  }
+}
+
+logoutEl.addEventListener('click', logoutScript)
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // WEBSOCKET CLIENT //
 ///////////////////////////////////////////////////////////////////////////////////////
