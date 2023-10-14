@@ -80,16 +80,18 @@ const welcomeEl = document.getElementById('welcome')
 function getSessionDoctor() {
   return fetch('api/doctor/session').then((response) => response.json())
 }
+// Display doctor name in header
 getSessionDoctor().then((doctor) => {
   welcomeEl.innerText = `Welcome, Dr. ${doctor.fullName}`
 })
 
 // Call API to get list of current doctor's patients
-function getPatientList(doctor_id) {
-  return fetch(`api/doctor/${doctor_id}/patient`).then((response) =>
+function getPatientList() {
+  return fetch(`api/doctor/session/patient`).then((response) =>
     response.json()
   );
 }
+getPatientList().then((patients) => console.log(patients))
 
 function getPatientDropdown() {
   return fetch(`api/patient`).then((response) =>
@@ -140,7 +142,7 @@ function updatePatient(patient) {
 // Placeholder value until user auth works
 // const doctorId = 4;
 
-getPatientDropdown().then((patients) => {
+getPatientList().then((patients) => {
   patients.forEach((patient) => {
     choosePatientEl.innerHTML += `
     <a href="#" class="w-100 list-group-item list-group-item-action " id="${patient.id}">${patient.lastName}, ${patient.firstName}</a>
