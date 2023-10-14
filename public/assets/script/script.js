@@ -75,6 +75,14 @@ socket.on("autoseed", (data) => {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////
+const welcomeEl = document.getElementById('welcome')
+// Get current session doctor
+function getSessionDoctor() {
+  return fetch('api/doctor/session').then((response) => response.json())
+}
+getSessionDoctor().then((doctor) => {
+  welcomeEl.innerText = `Welcome, Dr. ${doctor.fullName}`
+})
 
 // Call API to get list of current doctor's patients
 function getPatientList(doctor_id) {
