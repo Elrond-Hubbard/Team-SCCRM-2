@@ -8,15 +8,15 @@ router.get("/", (req, res) => {
 });
 
 // Get one doctor
-router.get("/:id", (req, res) => {
-  Doctor.findOne({ where: { id: req.params.id } }).then((data) =>
+router.get("/session", (req, res) => {
+  Doctor.findOne({ where: { id: req.session.doctorId } }).then((data) =>
     res.json(data)
   );
 });
 
 // Get all of current doctor's patients
-router.get("/:id/patient", (req, res) => {
-  Patient.findAll({ where: { doctor_id: req.params.id } }).then((data) =>
+router.get("/session/patient", (req, res) => {
+  Patient.findAll({ where: { doctor_id: req.session.doctorId } }).then((data) =>
     res.json(data)
   );
 });

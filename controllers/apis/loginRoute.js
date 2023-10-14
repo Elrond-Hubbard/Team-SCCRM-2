@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         await req.session.save(() => {
             req.session.physician_id = userMatch;
             req.session.logged_in = true;
-
+            req.session.doctorId = userMatch.id;
             res.status(200).json({user: userMatch, message: 'You are logged in!'})
         })
 
