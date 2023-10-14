@@ -2,7 +2,6 @@ body {
   background-image: url('../img/surgeon.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
 }
 
 header {
@@ -20,15 +19,6 @@ main{
   padding-top: 2rem;
 }
 
-#mainContainer {
-  outline: 2px solid black;
-  height: 100%;
-  max-width: 1000px;
-  float: right;
-  /* margin: auto; */
-  margin-bottom: 10px;
-}
-
 canvas {
   position: absolute;
   top: 0;
@@ -36,25 +26,6 @@ canvas {
   background-color: black;
 }
 
-#patInfo {
-  margin-bottom: 1%;
-}
-#vitalData {
-  font-size: 60px;
-}
-#resp {
-  margin-top: 20px;
-}
 #pleth {
-  margin-top: 20px;
-  height: 250px;
-}
-#vitalContainer {
-  margin-top: 10px;
   height: 150px;
-}
-
-#patientListDiv{
-  margin-right: 1%;
-  width: 20rem;
 }

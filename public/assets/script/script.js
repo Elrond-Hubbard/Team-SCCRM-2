@@ -134,9 +134,9 @@ function updateTimeline(vitals) {
 // Update patient info element
 function updatePatient(patient) {
   patientInfoEl.innerHTML = `
-  <th class="col-6" scope="col">${patient.firstName} ${patient.lastName}</th>
-  <th class="col-3" scope="col">Age: ${patient.age}</th>
-  <th class="col-3" scope="col">Weight: ${patient.weight}</th>`
+  <th class="col-md-6 col-12" scope="col">${patient.firstName} ${patient.lastName}</th>
+  <th class="col-md-3 col-12" scope="col">Age: ${patient.age}</th>
+  <th class="col-md-3 col-12" scope="col">Weight: ${patient.weight}</th>`
 }
 
 // Placeholder value until user auth works
