@@ -21,7 +21,7 @@ const loginForm = async (event) => {
     if (response.ok) {
         document.location.replace('/home')
     }
-    } else {
+    } else { // display warning message
         warningEl.innerHTML = `
         <div class="alert alert-danger mx-3 mt-3 p-3" role="alert">
             <strong>Your Physician ID/Password do not match our records.</strong>
