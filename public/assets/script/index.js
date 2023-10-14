@@ -1,3 +1,5 @@
+const warningEl = document.getElementById('warningMessage')
+
 const loginForm = async (event) => {
     event.preventDefault();
 
@@ -5,6 +7,9 @@ const loginForm = async (event) => {
     let physicianID = document.getElementById('physician').value.trim()
     let password = document.getElementById('password').value.trim()
     
+    // Clear warning message
+    warningEl.innerHTML=''
+
     // Send a POST to the API
     if (physicianID && password) {
         const response = await fetch('/api/login/', {
@@ -17,7 +22,11 @@ const loginForm = async (event) => {
         document.location.replace('/home')
     }
     } else {
-        console.log('missing either ID or password')
+        warningEl.innerHTML = `
+        <div class="alert alert-danger mx-3 mt-3 p-3" role="alert">
+            <strong>Your Physician ID/Password do not match our records.</strong>
+        </div>
+        `
     }
 
 }
