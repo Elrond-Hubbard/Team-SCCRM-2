@@ -116,16 +116,19 @@ function updateMonitor(vitals) {
 
 // Update timeline to list current patient's history
 function updateTimeline(vitals) {
+
   timelineEl.innerHTML = ``;
   recentVitals = vitals.slice(Math.max(vitals.length - 10, 1));
   recentVitals.forEach((entry) => {
+    const timestamp = new Date(entry.createdAt);
+    const time = timestamp.toLocaleTimeString('en-US');
     timelineEl.innerHTML += `
     <tr>
     <td>${entry.heartRate}</td>
     <td>${entry.systolic}|${entry.diastolic}</td>
     <td>${entry.bodyTemp}</td>
     <td>${entry.O2}%</td>
-    <td>${entry.createdAt}</td>
+    <td>${time}</td>
     </tr>
     `;
   });
