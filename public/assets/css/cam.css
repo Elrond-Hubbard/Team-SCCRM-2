@@ -1,5 +1,5 @@
 body {
-  background-image: url('../img/surgeon.jpg');
+  background-image: url("../img/surgeon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -8,10 +8,10 @@ header {
   background-color: rgba(56, 108, 221, 0.5);
 }
 .logoCstm {
-  color: rgb(154, 255, 253)
+  color: rgb(154, 255, 253);
 }
 
-main{
+main {
   display: flex;
   height: 100%;
   max-width: 1400px;
@@ -28,4 +28,17 @@ canvas {
 
 #pleth {
   height: 150px;
+}
+
+/* If the screen size is 1440px wide or more, set the font-size to 80px */
+@media (min-width: 1440px) {
+  .vital {
+    font-size: 55px;
+  }
+}
+/* If the screen size is smaller than 1440px, set the font-size to 30px */
+@media (max-width: 1439.98px) {
+  .vital {
+    font-size: 30px;
+  }
 }
