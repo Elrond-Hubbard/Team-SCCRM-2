@@ -30,6 +30,10 @@ canvas {
   height: 150px;
 }
 
+#commentDiv {
+  text-align: end;
+}
+
 /* If the screen size is 1440px wide or more, set the font-size to 80px */
 @media (min-width: 1440px) {
   .vital {
