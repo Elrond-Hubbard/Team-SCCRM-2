@@ -199,6 +199,7 @@ saveCommentBtn.addEventListener('click', async (e) => {
 
 
   // Update the patient's comment by sending a request to the server
+ 
   try {
     const response = await fetch(`/api/patient/${patientId}`, {
       method: 'PUT',
@@ -207,10 +208,15 @@ saveCommentBtn.addEventListener('click', async (e) => {
     });
 
     if (response.ok) {
-      patient.comment = commentInput;
-      
-      // Update the history element to display the updated comment
-      historyEl.innerHTML = `${commentInput}`;
+      getPatient(`${patientId}`).then((patient) =>{
+
+        patient.comment = commentInput;
+        
+        // Update the history element to display the updated comment
+        // historyEl.innerHTML = `${commentInput}`;
+        updateHistory(patient)
+      })
+
     } else {
       console.error('Failed to update comment');
     }
@@ -218,6 +224,7 @@ saveCommentBtn.addEventListener('click', async (e) => {
     console.error(err);
   }
 });
+
 
 // newPatientFormData.addEventListener('submit', (e) => {
 //   e.preventDefault()
