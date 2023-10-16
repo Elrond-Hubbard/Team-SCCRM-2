@@ -108,9 +108,9 @@ function getPatient(patient_id) {
 
 function updateHistory(patient) {
   if(patient.comment === null){
-    historyEl.innerHTML = ''
+    historyEl.value = ''
   } else{
-  historyEl.innerHTML = `${patient.comment}`
+  historyEl.value = `${patient.comment}`
   }
 }
 
