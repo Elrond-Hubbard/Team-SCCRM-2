@@ -165,18 +165,19 @@
         </div>
         <!-- COMMENT CONTAINER -->
         <div class="card my-1">
-          <div id="commentHeader" class="card-header text-center" id="headingOne">
+          <div id="commentHeader" class="card-header text-center d-flex justify-content-between" id="headingOne">
+            <button id="commentSave" type="submit" class="btn btn-primary ">Save</button>
             <h5>
               History
             </h5>
+            <div><!--don't delete me--></div>
           </div>
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div>
             <form id="commentForm"> <!-- Wrap the content in a form -->
               <!-- <button id="editCommentBtn" type="button" class="btn btn-primary btn-sm float-end ">Edit</button> -->
               <div class="card-body">
                 <textarea id="commentContainer" class="form-control" rows="4" ></textarea>
               </div>
-              <button id="commentSave" type="submit" class="btn btn-primary">Save</button>
             </form>
           </div>
         </div>
