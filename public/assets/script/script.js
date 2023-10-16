@@ -12,6 +12,7 @@ const choosePatientEl = document.getElementById("availablePatientList");
 const logoutEl = document.getElementById('logoutBtn')
 const historyEl = document.getElementById('commentContainer')
 const saveCommentBtn = document.getElementById('commentSave')
+const deleteBtn = document.getElementById('deletePatientBtn')
 // logout logic
 const logoutScript = async () => {
   const response = await fetch('api/logout', {
@@ -162,6 +163,31 @@ getPatientList().then((patients) => {
     `;
   });
 });
+
+deleteBtn.addEventListener('click', async ()=> {
+  try {
+    const response = await fetch(`/api/patient/${patientId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      
+      
+    });
+    console.log(response)
+
+    if (response.ok) {
+     
+      console.log('Patient deleted successfully');
+    } else {
+      // Failed to delete the patient
+      console.error('Failed to delete the patient');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
+
 // create variable to store previous target
 let previousTarget = null;
 
@@ -199,6 +225,7 @@ saveCommentBtn.addEventListener('click', async (e) => {
 
 
   // Update the patient's comment by sending a request to the server
+ 
   try {
     const response = await fetch(`/api/patient/${patientId}`, {
       method: 'PUT',
@@ -207,10 +234,15 @@ saveCommentBtn.addEventListener('click', async (e) => {
     });
 
     if (response.ok) {
-      patient.comment = commentInput;
-      
-      // Update the history element to display the updated comment
-      historyEl.innerHTML = `${commentInput}`;
+      getPatient(`${patientId}`).then((patient) =>{
+
+        patient.comment = commentInput;
+        
+        // Update the history element to display the updated comment
+        // historyEl.innerHTML = `${commentInput}`;
+        updateHistory(patient)
+      })
+
     } else {
       console.error('Failed to update comment');
     }
@@ -218,6 +250,8 @@ saveCommentBtn.addEventListener('click', async (e) => {
     console.error(err);
   }
 });
+
+
 
 // newPatientFormData.addEventListener('submit', (e) => {
 //   e.preventDefault()
