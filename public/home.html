@@ -165,27 +165,28 @@
         </div>
         <!-- COMMENT CONTAINER -->
         <div class="card my-1">
-          <div id="commentHeader" class="card-header text-center d-flex justify-content-between" id="headingOne">
-            <button id="commentSave" type="submit" class="btn btn-primary ">Save</button>
+          <div id="commentHeader" class="card-header w-100 text-center" id="headingOne">
             <h5>
               History
             </h5>
             <div><!--don't delete me--></div>
           </div>
           <div>
-            <form id="commentForm"> <!-- Wrap the content in a form -->
-              <!-- <button id="editCommentBtn" type="button" class="btn btn-primary btn-sm float-end ">Edit</button> -->
+            <form id="commentForm">
               <div class="card-body">
                 <textarea id="commentContainer" class="form-control" rows="4" ></textarea>
               </div>
             </form>
+            <div id="commentDiv">
+              <button id="commentSave" type="submit" class="btn btn-primary me-4 mb-2">Save to History</button>
+            </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mb-3 mt-2">
           <div class="col-12 my-1 mb-2">
             <div id="resp" class="card">
+              <h5 class="card-header text-center">Timeline</h5>
               <div class="card-body text-center">
-                <h5 class="card-title">Timeline</h5>
                 <table class="table table-striped">
                   <thead>
                     <tr>
