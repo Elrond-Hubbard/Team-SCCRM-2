@@ -25,6 +25,7 @@ router.get("/", (req, res) => {
         lastName: newPatientData.lastName,
         age: newPatientData.age,
         weight: newPatientData.weight,
+        comment: newPatientData.comment,
         doctor_id: newPatientData.doctor_id,
         // systolic: newPatientData.systolic,
         // diastolic: newPatientData.diastolic,
@@ -63,6 +64,7 @@ router.get("/", (req, res) => {
           lastName: req.body.lastName,
           age: req.body.age,
           weight: req.body.weight,
+          comment: req.body.comment,
           doctor_id: req.body.doctor_id,
         },
         {

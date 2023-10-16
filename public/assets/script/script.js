@@ -10,7 +10,8 @@ const choosePatientBtn = document.getElementById("choosePatientBtn");
 const choosePatientModal = document.getElementById("patientModal2");
 const choosePatientEl = document.getElementById("availablePatientList");
 const logoutEl = document.getElementById('logoutBtn')
-
+const historyEl = document.getElementById('commentContainer')
+const saveCommentBtn = document.getElementById('commentSave')
 // logout logic
 const logoutScript = async () => {
   const response = await fetch('api/logout', {
@@ -105,6 +106,14 @@ function getPatient(patient_id) {
   );
 }
 
+function updateHistory(patient) {
+  if(patient.comment === null){
+    historyEl.innerHTML = ''
+  } else{
+  historyEl.innerHTML = `${patient.comment}`
+  }
+}
+
 // Update vitals monitor to reflect most recent vitals data
 function updateMonitor(vitals) {
   heartRateEl.innerText = vitals.heartRate;
@@ -136,6 +145,7 @@ function updateTimeline(vitals) {
 
 // Update patient info element
 function updatePatient(patient) {
+  // historyEl.innerHTML = `${patient.comment}`
   patientInfoEl.innerHTML = `
   <th class="col-md-6 col-12" scope="col">${patient.firstName} ${patient.lastName}</th>
   <th class="col-md-3 col-12" scope="col">Age: ${patient.age}</th>
@@ -170,6 +180,7 @@ choosePatientEl.addEventListener("click", (event) => {
     previousTarget = event.target;
     // updates patient timeline, vitals, monitor, patient list. also starts the hearbeat animation
     getPatient(patientId).then((patient) => {
+      updateHistory(patient)
       updatePatient(patient);
       updateTimeline(patient.vitals);
       const currentVitals = patient.vitals.pop();
@@ -178,6 +189,33 @@ choosePatientEl.addEventListener("click", (event) => {
       Tone.Transport.start(0);
       heartbeat.start(0);
     });
+  }
+});
+
+saveCommentBtn.addEventListener('click', async (e) => {
+  e.preventDefault(); 
+  const commentInput = document.getElementById("commentContainer").value;
+
+
+
+  // Update the patient's comment by sending a request to the server
+  try {
+    const response = await fetch(`/api/patient/${patientId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment: commentInput }),
+    });
+
+    if (response.ok) {
+      patient.comment = commentInput;
+      
+      // Update the history element to display the updated comment
+      historyEl.innerHTML = `${commentInput}`;
+    } else {
+      console.error('Failed to update comment');
+    }
+  } catch (err) {
+    console.error(err);
   }
 });
 
