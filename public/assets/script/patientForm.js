@@ -55,7 +55,7 @@ newPatientForm.addEventListener("submit", async (e) => {
 
   // Reset and repopulate patient list sidebar
   choosePatientEl.innerHTML = ``;
-  choosePatientEl.innerHTML += `<button type="button" id="newPatientBtn"class="btn w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Patient</button>`;
+  choosePatientEl.innerHTML += `<button type="button" id="newPatientBtn"class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Patient</button>`;
   getPatientDropdown().then((patients) => {
     patients.forEach((patient) => {
       choosePatientEl.innerHTML += `
