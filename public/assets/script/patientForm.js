@@ -5,6 +5,7 @@ const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
 newPatientForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  // built in JS object
   const fd = new FormData(newPatientForm);
   let newPatientFormData = Object.fromEntries(fd);
 
