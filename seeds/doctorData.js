@@ -2,27 +2,27 @@ const Doctor = require("../models/Doctor");
 
 const doctordata = [
   {
-    fullName: "sBunde",
+    fullName: "Steven Bunde",
     loginID: "1111",
     password: "1",
   },
   {
-    fullName: "cDehaan",
+    fullName: "Chris DeHaan",
     loginID: "2222",
     password: "2",
   },
   {
-    fullName: "cGilliand",
+    fullName: "Campbell Gilliland",
     loginID: "3333",
     password: "3",
   },
   {
-    fullName: "rHochman",
+    fullName: "Rachel Hochman",
     loginID: "4444",
     password: "4",
   },
   {
-    fullName: "eHubbard",
+    fullName: "Michael Marsolo",
     loginID: "5555",
     password: "5",
   },
