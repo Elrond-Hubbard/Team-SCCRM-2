@@ -1,7 +1,7 @@
 # Team-SCCRM: Remote Patient Monitoring
 
 ## Deployed Link
-https://sccrm-diagnostics-7fb52a7a34b8.herokuapp.com/
+https://sccrm-healthcare-bbafb87ca81b.herokuapp.com/home
 
 ![alt text](public/assets/img/screenshot.jpg)
 
