@@ -50,7 +50,7 @@ socket.on("autoseed", (data) => {
     updateTimeline(patient.vitals);
     const currentVitals = patient.vitals.pop();
     updateMonitor(currentVitals); 
-    if (currentVitals.heartRate > 100 || currentVitals.heartRate < 60) 
+    if (currentVitals.heartRate > 90 || currentVitals.heartRate < 60) 
     {
       socket.emit("HRALERT", data) 
     }
@@ -70,7 +70,7 @@ socket.on("autoseed", (data) => {
     {
     socket.emit("TEMPALERT", data)
     }
-    if (currentVitals.O2 < 90 || currentVitals.O2 > 100) 
+    if (currentVitals.O2 < 90 || currentVitals.O2 > 95) 
     {
     socket.emit("O2ALERT", data)
     }
