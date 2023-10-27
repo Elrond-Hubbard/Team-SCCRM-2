@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const path = require('path')
-const authCheck = require('../utils/helpers')
+const path = require("path");
+const authCheck = require("../utils/helpers");
 const { Doctor, Patient, Vitals } = require("../models/index");
 
 // Get login page

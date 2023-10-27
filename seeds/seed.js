@@ -1,20 +1,20 @@
 const sequelize = require("../config/connection");
-const seedDoctor = require('./doctorData');
-const seedPatient = require('./patientData');
-const seedVitals = require('./vitalsData');
+const seedDoctor = require("./doctorData");
+const seedPatient = require("./patientData");
+const seedVitals = require("./vitalsData");
 
 const seedAll = async () => {
   await sequelize.sync();
   await seedDoctor();
   await seedPatient();
   await seedVitals();
-  console.log('DATABASE SEEDED')
+  console.log("DATABASE SEEDED");
   process.exit(0);
-}
+};
 
 seedAll();
 
-  //Patient data to be parsed for doctors to see, doctors will not see all info, only parsed data//
+//Patient data to be parsed for doctors to see, doctors will not see all info, only parsed data//
 // Array of patient data with assigned street addresses, phone numbers, and emails
 // const patients = [
 //     {
@@ -184,6 +184,5 @@ seedAll();
 //     },
 //     // Add more patient objects here with the same structure
 //   ];
-  
-//   console.log(patients); // 
-  
+
+//   console.log(patients); //

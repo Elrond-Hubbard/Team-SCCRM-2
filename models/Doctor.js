@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 
 class Doctor extends Model {
   // use built-in bcrypt compareSync in order to compare the entered password to db and return true/false
   passwordAuth(userPassword) {
-    return bcrypt.compareSync(userPassword, this.password)
+    return bcrypt.compareSync(userPassword, this.password);
   }
 }
 
@@ -23,7 +23,7 @@ Doctor.init(
     },
     loginID: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
@@ -34,9 +34,9 @@ Doctor.init(
     hooks: {
       //hash the password before adding it to the db
       beforeCreate: async (data) => {
-        data.password = await bcrypt.hash(data.password, 10)
-        return data
-      }
+        data.password = await bcrypt.hash(data.password, 10);
+        return data;
+      },
     },
     sequelize,
     timestamps: false,

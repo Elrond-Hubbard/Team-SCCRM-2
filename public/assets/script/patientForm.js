@@ -1,7 +1,7 @@
 const newPatientForm = document.getElementById("newPatientForm");
 let newPatientFormData = {};
 
-const modal = new bootstrap.Modal(document.getElementById('exampleModal')); 
+const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
 
 newPatientForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -11,7 +11,7 @@ newPatientForm.addEventListener("submit", async (e) => {
 
   const newPatientJson = JSON.stringify(newPatientFormData);
 
-  console.log(newPatientJson) 
+  console.log(newPatientJson);
 
   try {
     const response = await fetch("/api/patient/", {
@@ -57,7 +57,7 @@ newPatientForm.addEventListener("submit", async (e) => {
   } catch (err) {
     console.error(err);
   }
-  
+
   // Reset and repopulate patient list sidebar
   choosePatientEl.innerHTML = ``;
   choosePatientEl.innerHTML += `<button type="button" id="newPatientBtn"class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Patient</button>`;
@@ -68,8 +68,8 @@ newPatientForm.addEventListener("submit", async (e) => {
       `;
     });
   });
-  
-  modal.hide()
+
+  modal.hide();
 });
 
 // const createNewPatient = () => Patient.create(newPatientFormData)

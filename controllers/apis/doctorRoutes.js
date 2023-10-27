@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const authCheck = require('../../utils/helpers')
+const authCheck = require("../../utils/helpers");
 const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all doctors
@@ -28,7 +28,7 @@ router.get("/:id/patient/:patient_id", authCheck, (req, res) => {
       doctor_id: req.params.id,
       id: req.params.patient_id,
     },
-    include: [Vitals]
+    include: [Vitals],
   }).then((data) => res.json(data));
 });
 

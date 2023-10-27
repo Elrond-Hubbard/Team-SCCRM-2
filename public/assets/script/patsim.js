@@ -9,17 +9,14 @@ socket.on("logout", (data) => {
   clientEl.innerText = `Clients Connected: ${data}`;
 });
 
-
 // send values through socket
 function sendSocket(event, value) {
-  socket.emit(event, value)
+  socket.emit(event, value);
 }
 
 slider.addEventListener("input", () => {
-  sendSocket('BPM', slider.value)
+  sendSocket("BPM", slider.value);
 });
-
-
 
 // Post vitals entry
 function postVitals(vitals) {
@@ -52,12 +49,12 @@ function postAutoseed() {
       };
       postVitals(vitals);
     });
-    sendSocket('autoseed', 'autoseed')
+    sendSocket("autoseed", "autoseed");
   });
 }
 
 // Handle autoseed button
 const autoseedBtn = document.getElementById("autoseed");
 autoseedBtn.addEventListener("click", () => {
-  postAutoseed()
+  postAutoseed();
 });

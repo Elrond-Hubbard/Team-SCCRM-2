@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const authCheck = require('../../utils/helpers')
+const authCheck = require("../../utils/helpers");
 const { Doctor, Patient, Vitals } = require("../../models/index");
 
 // Get all patient vitals
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
     res.status(200).json(newVitals);
   } catch (err) {
     res.status(400).json(err);
-    console.log(err)
+    console.log(err);
   }
 });
 

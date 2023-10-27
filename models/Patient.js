@@ -1,5 +1,3 @@
-
-
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
@@ -30,7 +28,7 @@ Patient.init(
       allowNull: false,
     },
     comment: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     doctor_id: {
       type: DataTypes.INTEGER,

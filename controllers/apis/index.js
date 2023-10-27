@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const logoutRoutes = require('./logoutRoute')
+const logoutRoutes = require("./logoutRoute");
 const loginRoutes = require("./loginRoute");
 const doctorRoutes = require("./doctorRoutes");
 const patientRoutes = require("./patientRoutes");

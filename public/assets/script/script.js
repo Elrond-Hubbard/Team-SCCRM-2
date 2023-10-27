@@ -164,30 +164,6 @@ getPatientList().then((patients) => {
   });
 });
 
-// deleteBtn.addEventListener('click', async ()=> {
-//   try {
-//     const response = await fetch(`/api/patient/${patientId}`, {
-//       method: 'DELETE',
-//       headers: { 'Content-Type': 'application/json' },
-      
-      
-//     });
-//     console.log(response)
-
-//     if (response.ok) {
-     
-//       console.log('Patient deleted successfully');
-//     } else {
-//       // Failed to delete the patient
-//       console.error('Failed to delete the patient');
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
-
-
-
 // create variable to store previous target
 let previousTarget = null;
 
